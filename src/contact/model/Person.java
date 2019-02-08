@@ -37,4 +37,8 @@ public class Person {
     this.birthdate = birthdate;
     this.gender = gender;
   }
+
+  public PersonBuilder getPersonBuilder(String name, String surname) {
+    return new PersonBuilder(name, surname);
+  }
 }

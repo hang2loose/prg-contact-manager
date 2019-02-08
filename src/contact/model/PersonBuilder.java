@@ -10,7 +10,7 @@ public class PersonBuilder {
 
   private Gender gender = Gender.NONE;
 
-  private PersonBuilder(String surname, String name) {
+  PersonBuilder(String surname, String name) {
     this.surname = surname;
     this.name = name;
   }

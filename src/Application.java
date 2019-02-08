@@ -1,7 +1,12 @@
+import contact.ContactManager;
+
 public class Application {
 
+  static {
+    DummyDataCreator.createDummyContacts();
+  }
+
   public static void main(String[] args) {
-    System.out.println("Hello World! To you too!");
-    System.out.println("Heelo from the otherside");
+    ContactManager.run();
   }
 }

@@ -1,7 +1,8 @@
 package contact;
 
-public class InputHandler {
+class InputHandler {
 
-  
-
+  StateOfManager getInput(StateOfManager state) {
+    return null;
+  }
 }

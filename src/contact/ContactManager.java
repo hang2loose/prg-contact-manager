@@ -3,12 +3,13 @@ package contact;
 import java.util.HashMap;
 
 enum StateOfManager {
-  GET_COMMAND
+  GET_INPUT, GET_COMMAND
 }
 
 public class ContactManager {
 
   private static ContactManager contactManager = null;
+  private static InputHandler inputHandler = null;
 
   private ContactManager() {
   }
@@ -24,6 +25,7 @@ public class ContactManager {
           .println("########################################################################");
       System.out.println("\n");
       contactManager = new ContactManager();
+      inputHandler = new InputHandler();
     }
     return contactManager;
   }
@@ -37,8 +39,11 @@ public class ContactManager {
       switch (stateOfManager) {
         case GET_COMMAND:
           prtintCommands();
-          return false;
-        //break;
+          stateOfManager = StateOfManager.GET_INPUT;
+          break;
+        case GET_INPUT:
+          stateOfManager = inputHandler.getInput(stateOfManager);
+          break;
         default:
           return false;
       }

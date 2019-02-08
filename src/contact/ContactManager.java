@@ -10,6 +10,9 @@ public class ContactManager {
 
   private static ContactManager contactManager = null;
 
+  private ContactManager() {
+  }
+
   public static ContactManager getInstance() {
 
     if (contactManager == null) {
@@ -27,15 +30,15 @@ public class ContactManager {
 
   HashMap<Integer, ContactCard> contactCardRepo = new HashMap<>();
 
-  private static StateOfManager stateOfManager = StateOfManager.GET_COMMAND;
+  private StateOfManager stateOfManager = StateOfManager.GET_COMMAND;
 
-  public static boolean runContactManager() {
+  public boolean runContactManager() {
     while (true) {
       switch (stateOfManager) {
         case GET_COMMAND:
           prtintCommands();
-          clear();
-          break;
+          return false;
+        //break;
         default:
           return false;
       }

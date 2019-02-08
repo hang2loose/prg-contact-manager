@@ -8,6 +8,6 @@ public class Application {
 */
 
   public static void main(String[] args) {
-    ContactManager.runContactManager();
+    ContactManager.getInstance().runContactManager();
   }
 }

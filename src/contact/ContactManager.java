@@ -2,6 +2,9 @@ package contact;
 
 import java.util.HashMap;
 
+enum StateOfManager {
+}
+
 public class ContactManager {
 
   HashMap<Integer, ContactCard> contactCardRepo = new HashMap<>();

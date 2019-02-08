@@ -1,14 +1,12 @@
 package contact.model;
 
-import java.time.LocalDate;
-
 public class PersonBuilder {
 
   private String surname;
   private String name;
 
   private String title = "";
-  private LocalDate birthdate = null;
+  private String birthdate = "none";
 
   private Gender gender = Gender.NONE;
 
@@ -24,5 +22,19 @@ public class PersonBuilder {
   PersonBuilder setGender(String gender) {
     this.gender = Gender.fromString(gender);
     return this;
+  }
+
+  PersonBuilder setTitle(String title) {
+    this.title = title;
+    return this;
+  }
+
+  PersonBuilder setBirthdate(String birthdate) {
+    this.birthdate = birthdate;
+    return this;
+  }
+
+  Person buildPerson() {
+    return new Person(surname, name, title, birthdate, gender);
   }
 }

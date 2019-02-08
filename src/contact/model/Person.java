@@ -1,7 +1,5 @@
 package contact.model;
 
-import java.time.LocalDate;
-
 enum Gender {
   NONE("n"), DIVERSE("d"), FEMALE("f"), MALE("m");
 
@@ -27,11 +25,11 @@ public class Person {
   private String name;
 
   private String title;
-  private LocalDate birthdate;
+  private String birthdate;
 
   private Gender gender;
 
-  private Person(String surname, String name, String title, LocalDate birthdate,
+  Person(String surname, String name, String title, String birthdate,
       Gender gender) {
     this.surname = surname;
     this.name = name;

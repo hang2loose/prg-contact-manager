@@ -2,16 +2,14 @@ package contact.model;
 
 public class Communication {
 
-  private String phone;
-  private String mail;
+  String phone;
+  String mail;
 
-  Communication(String phone, String mail) {
-    this.phone = phone;
-    this.mail = mail;
+  Communication() {
   }
 
-  public CommunicationBuilder getCommunicationBuilder(String phone) {
-    return new CommunicationBuilder(phone);
+  public static CommunicationBuilder getCommunicationBuilder() {
+    return new CommunicationBuilder();
   }
 
 }

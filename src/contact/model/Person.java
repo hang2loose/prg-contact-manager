@@ -21,24 +21,18 @@ enum Gender {
 }
 
 public class Person {
-  private String surname;
-  private String name;
+  String surname;
+  String name;
 
-  private String title;
-  private String birthdate;
+  String title;
+  String birthday;
 
-  private Gender gender;
+  Gender gender;
 
-  Person(String surname, String name, String title, String birthdate,
-      Gender gender) {
-    this.surname = surname;
-    this.name = name;
-    this.title = title;
-    this.birthdate = birthdate;
-    this.gender = gender;
+  Person() {
   }
 
-  public PersonBuilder getPersonBuilder(String name, String surname) {
-    return new PersonBuilder(name, surname);
+  public PersonBuilder getPersonBuilder() {
+    return new PersonBuilder();
   }
 }

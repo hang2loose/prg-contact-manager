@@ -6,25 +6,25 @@ import contact.model.Person;
 
 public class ContactCardBuilder {
 
-  private ContactCard contactCardUnderConstruktion = new ContactCard();
+  private ContactCard contactCardUnderConstruction = new ContactCard();
 
   ContactCardBuilder withAddress(Address address) {
-    contactCardUnderConstruktion.address = address;
+    contactCardUnderConstruction.address = address;
     return this;
   }
 
   ContactCardBuilder withPerson(Person person) {
-    contactCardUnderConstruktion.person = person;
+    contactCardUnderConstruction.person = person;
     return this;
   }
 
   ContactCardBuilder withCommunication(Communication communication) {
-    contactCardUnderConstruktion.communication = communication;
+    contactCardUnderConstruction.communication = communication;
     return this;
   }
 
   ContactCard build() {
-    return contactCardUnderConstruktion;
+    return contactCardUnderConstruction;
   }
 
 }

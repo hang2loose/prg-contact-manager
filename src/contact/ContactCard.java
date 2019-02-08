@@ -1,7 +1,7 @@
 package contact;
 
 import contact.model.Address;
-import contact.model.Contact;
+import contact.model.Communication;
 import contact.model.Person;
 
 public class ContactCard {
@@ -10,7 +10,7 @@ public class ContactCard {
 
   private Address address;
   private Person person;
-  private Contact contact;
+  private Communication contact;
 
 
 }

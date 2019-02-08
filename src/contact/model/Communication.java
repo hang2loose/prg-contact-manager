@@ -9,4 +9,9 @@ public class Communication {
     this.phone = phone;
     this.mail = mail;
   }
+
+  public CommunicationBuilder getCommunicationBuilder(String phone) {
+    return new CommunicationBuilder(phone);
+  }
+
 }

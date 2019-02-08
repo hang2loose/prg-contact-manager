@@ -10,10 +10,14 @@ public class ContactCard {
   private UUID id;
 
   private Address address;
+  private Communication communication;
   private Person person;
-  private Communication contact;
 
-  private ContactCard() {
+  ContactCard(Address address, Communication communication, Person person) {
     this.id = UUID.randomUUID();
+    this.address = address;
+    this.communication = communication;
+    this.person = person;
   }
+
 }

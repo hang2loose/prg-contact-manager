@@ -5,12 +5,8 @@ public class CommunicationBuilder {
   private String phone;
   private String mail = "";
 
-  private CommunicationBuilder(String phone) {
+  CommunicationBuilder(String phone) {
     this.phone = phone;
-  }
-
-  public CommunicationBuilder getCommunicationBuilder(String phone) {
-    return new CommunicationBuilder(phone);
   }
 
   CommunicationBuilder setMail(String mail) {

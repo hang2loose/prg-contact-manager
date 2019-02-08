@@ -8,12 +8,8 @@ public class AddressBuilder {
   private String street = "";
   private String streetNumber = "";
 
-  private AddressBuilder() {
+  AddressBuilder() {
 
-  }
-
-  public AddressBuilder getAddressBuilder() {
-    return new AddressBuilder();
   }
 
   AddressBuilder getCountry(String country) {

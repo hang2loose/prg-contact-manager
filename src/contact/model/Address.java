@@ -16,4 +16,8 @@ public class Address {
     this.street = street;
     this.streetNumber = streetNumber;
   }
+
+  public AddressBuilder getAddressBuilder() {
+    return new AddressBuilder();
+  }
 }

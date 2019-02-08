@@ -1,29 +1,30 @@
 package contact;
 
 import contact.model.Address;
-import contact.model.AddressBuilder;
 import contact.model.Communication;
 import contact.model.Person;
 
 public class ContactCardBuilder {
 
-  private Address address;
-  private Communication communication;
-  private Person person;
+  private ContactCard contactCardUnderConstruktion = new ContactCard();
 
-  private ContactCardBuilder(Address address, Person person, Communication communication) {
-    this.address = address;
-    this.communication = communication;
-    this.person = person;
-  }
-
-  ContactCardBuilder buildAddress() {
-    this.address = AddressBuilder
+  ContactCardBuilder withAddress(Address address) {
+    contactCardUnderConstruktion.address = address;
     return this;
   }
 
-  ContactCard buildContactCard() {
-    return new ContactCard(address, communication, person);
+  ContactCardBuilder withPerson(Person person) {
+    contactCardUnderConstruktion.person = person;
+    return this;
+  }
+
+  ContactCardBuilder withCommunication(Communication communication) {
+    contactCardUnderConstruktion.communication = communication;
+    return this;
+  }
+
+  ContactCard build() {
+    return contactCardUnderConstruktion;
   }
 
 }

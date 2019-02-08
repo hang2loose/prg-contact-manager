@@ -9,15 +9,11 @@ public class ContactCard {
 
   private UUID id;
 
-  private Address address;
-  private Communication communication;
-  private Person person;
+  Address address;
+  Communication communication;
+  Person person;
 
-  ContactCard(Address address, Communication communication, Person person) {
-    this.id = UUID.randomUUID();
-    this.address = address;
-    this.communication = communication;
-    this.person = person;
+  ContactCard() {
   }
 
 }

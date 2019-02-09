@@ -18,8 +18,16 @@ class InputHandler {
     switch (command) {
       case 'a':
         return StateOfManager.GET_ALL_CONTACTS;
+      case 'n':
+        return StateOfManager.NOT_IMPLEMENTET_YET;
+      case 'k':
+        return StateOfManager.NOT_IMPLEMENTET_YET;
+      case 'd':
+        return StateOfManager.NOT_IMPLEMENTET_YET;
+      case 'l':
+        return StateOfManager.NOT_IMPLEMENTET_YET;
       case 'b':
-        return StateOfManager.END;
+        return StateOfManager.NOT_IMPLEMENTET_YET;
       default:
         throw new InputMismatchException("The givin imput [" + command + "] is not a command");
     }

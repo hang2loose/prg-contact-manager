@@ -3,7 +3,7 @@ package contact;
 import contact.services.ContactCardService;
 
 enum StateOfManager {
-  GET_INPUT, GET_COMMAND, END, INIT, GET_ALL_CONTACTS
+  GET_INPUT, GET_COMMAND, END, INIT, NOT_IMPLEMENTET_YET, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
@@ -22,7 +22,7 @@ public class ContactManager {
 
   private StateOfManager stateOfManager = StateOfManager.INIT;
 
-  public boolean runContactManager() {
+  public void runContactManager() {
     while (true) {
       switch (stateOfManager) {
         case INIT:
@@ -36,9 +36,14 @@ public class ContactManager {
           System.out.println(contactCardService.getAllLastNames());
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
+        case NOT_IMPLEMENTET_YET:
+          clear();
+          System.out.println("This method is not implementet yet!!!!!!!!!!!!!!!!");
+          stateOfManager = StateOfManager.GET_COMMAND;
+          break;
         case END:
         default:
-          return false;
+          return;
       }
     }
   }

@@ -11,6 +11,10 @@ public class Address {
   Address() {
   }
 
+  public AddressBuilder getAddressBuilder() {
+    return new AddressBuilder();
+  }
+
   public class AddressBuilder {
 
     private Address addressUnderConstruction = new Address();

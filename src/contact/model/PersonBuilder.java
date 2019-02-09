@@ -19,7 +19,7 @@ public class PersonBuilder {
     return this;
   }
 
-  Person buildPerson() {
+  Person build() {
     return personUnderConstruction;
   }
 }

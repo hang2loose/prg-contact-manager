@@ -17,4 +17,8 @@ public class ContactCard {
   public UUID getUID() {
     return this.id;
   }
+
+  public static ContactCardBuilder getContactCardBuilder() {
+    return new ContactCardBuilder();
+  }
 }

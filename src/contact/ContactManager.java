@@ -9,10 +9,14 @@ enum StateOfManager {
 public class ContactManager {
 
   private static ContactManager contactManager = null;
-  private static InputHandler inputHandler;
-  private static ContactCardService contactCardService;
+
+  private InputHandler inputHandler;
+  private ContactCardService contactCardService;
 
   private ContactManager() {
+    inputHandler = new InputHandler();
+    contactCardService = new ContactCardService();
+    contactCardService.initRepoWithDummyData();
   }
 
 
@@ -55,9 +59,6 @@ public class ContactManager {
           .println("########################################################################");
       System.out.println("\n");
       contactManager = new ContactManager();
-      inputHandler = new InputHandler();
-      contactCardService = new ContactCardService();
-      contactCardService.initRepoWithDummyData();
     }
     return contactManager;
   }

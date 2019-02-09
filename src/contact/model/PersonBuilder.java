@@ -4,22 +4,32 @@ public class PersonBuilder {
 
   private Person personUnderConstruction = new Person();
 
-  PersonBuilder withGender(String gender) {
+  public PersonBuilder withName(String name) {
+    personUnderConstruction.name = name;
+    return this;
+  }
+
+  public PersonBuilder withSurname(String surname) {
+    personUnderConstruction.surname = surname;
+    return this;
+  }
+
+  public PersonBuilder withGender(String gender) {
     personUnderConstruction.gender = Gender.fromString(gender);
     return this;
   }
 
-  PersonBuilder withTitle(String title) {
+  public PersonBuilder withTitle(String title) {
     personUnderConstruction.title = title;
     return this;
   }
 
-  PersonBuilder withBirthdate(String birthday) {
+  public PersonBuilder withBirthdate(String birthday) {
     personUnderConstruction.birthday = birthday;
     return this;
   }
 
-  Person build() {
+  public Person build() {
     return personUnderConstruction;
   }
 }

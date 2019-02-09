@@ -1,11 +1,36 @@
 package contact.services;
 
+import contact.model.Address;
+import contact.model.Communication;
 import contact.model.ContactCard;
+import contact.model.Person;
+import contact.repository.ContactRepository;
 
 public class DummyDataCreator {
 
-  public static void createDummyContacts() {
-    ContactCard contact1 = ContactCard.getContactCardBuilder().
+  public static void createDummyContacts(ContactRepository repository) {
+
+    ContactCard contact1 = ContactCard.getContactCardBuilder()
+        .withPerson(
+            Person
+                .getPersonBuilder()
+                .withBirthdate("10.10.10")
+                .build())
+        .withAddress(
+            Address
+                .getAddressBuilder()
+                .withCity("city")
+                .withCountry("Germany")
+                .build())
+        .withCommunication(Communication
+            .getCommunicationBuilder()
+            .withPhone("001 999999")
+            .withMail("mail@mail.de")
+            .build())
+        .build();
+
+    repository.save(contact1);
+
   }
 
 }

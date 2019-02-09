@@ -2,8 +2,8 @@ package contact.model;
 
 public class Communication {
 
-  String phone;
-  String mail;
+  String phone = "";
+  String mail = "";
 
   Communication() {
   }

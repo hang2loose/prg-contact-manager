@@ -19,6 +19,6 @@ public class ContactCardService {
   }
 
   public void initRepoWithDummyData() {
-    DummyDataCreator.createDummyContacts();
+    DummyDataCreator.createDummyContacts(contactRepository);
   }
 }

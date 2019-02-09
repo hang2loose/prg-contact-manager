@@ -1,8 +1,4 @@
-package contact;
-
-import contact.model.Address;
-import contact.model.Communication;
-import contact.model.Person;
+package contact.model;
 
 public class ContactCardBuilder {
 

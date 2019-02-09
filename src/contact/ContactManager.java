@@ -1,5 +1,6 @@
 package contact;
 
+import contact.model.ContactCard;
 import java.util.HashMap;
 
 enum StateOfManager {

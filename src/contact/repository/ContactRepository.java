@@ -1,4 +1,6 @@
-package contact;
+package contact.repository;
+
+import contact.model.ContactCard;
 
 public interface ContactRepository {
 

@@ -1,8 +1,5 @@
-package contact;
+package contact.model;
 
-import contact.model.Address;
-import contact.model.Communication;
-import contact.model.Person;
 import java.util.UUID;
 
 public class ContactCard {

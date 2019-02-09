@@ -1,4 +1,7 @@
-package contact;
+package contact.repository;
+
+import contact.ContactManager;
+import contact.model.ContactCard;
 
 public class ContactRepositoryImpl implements ContactRepository {
 

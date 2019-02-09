@@ -10,7 +10,7 @@ class InputHandler {
   StateOfManager getInput(StateOfManager state) {
     prtintCommands();
 
-    System.out.print("Deine Eingabe: ");
+    System.out.print(">");
 
     // TODO throw exception if string is longer than 1;
     char command = scanner.nextLine().toLowerCase().charAt(0);
@@ -26,12 +26,12 @@ class InputHandler {
   }
 
   private static void prtintCommands() {
+    System.out.println("\n\n");
     System.out.println("[A] Alle Kontakte anzeigen");
     System.out.println("[N] Neuen Kontakt erstellen");
     System.out.println("[K] Kontakt bearbeiten");
     System.out.println("[D] Kontaktdetails erstellen");
     System.out.println("[L] Kontakt loeschen");
     System.out.println("[B] Beenden");
-    System.out.println();
   }
 }

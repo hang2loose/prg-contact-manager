@@ -3,7 +3,7 @@ package contact;
 import contact.services.ContactCardService;
 
 enum StateOfManager {
-  GET_INPUT, GET_COMMAND, END, GET_ALL_CONTACTS
+  GET_INPUT, GET_COMMAND, END, INIT, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
@@ -20,20 +20,21 @@ public class ContactManager {
   }
 
 
-  private StateOfManager stateOfManager = StateOfManager.GET_COMMAND;
+  private StateOfManager stateOfManager = StateOfManager.INIT;
 
   public boolean runContactManager() {
     while (true) {
       switch (stateOfManager) {
+        case INIT:
+          start();
+          stateOfManager = StateOfManager.GET_COMMAND;
         case GET_COMMAND:
-          stateOfManager = StateOfManager.GET_INPUT;
-          break;
-        case GET_INPUT:
           stateOfManager = inputHandler.getInput(stateOfManager);
           break;
         case GET_ALL_CONTACTS:
+          clear();
           System.out.println(contactCardService.getAllLastNames());
-          stateOfManager = StateOfManager.GET_INPUT;
+          stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case END:
         default:
@@ -42,8 +43,14 @@ public class ContactManager {
     }
   }
 
+  private void start() {
+    System.out.println("########################################################################");
+    System.out.println("#                         Contact Manager v1.0                         #");
+    System.out.println("########################################################################");
+  }
+
   private static void clear() {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 8; i++) {
       System.out.println();
     }
   }
@@ -51,13 +58,6 @@ public class ContactManager {
   public static ContactManager getInstance() {
 
     if (contactManager == null) {
-      System.out
-          .println("########################################################################");
-      System.out
-          .println("#                         Contact Manager v1.0                         #");
-      System.out
-          .println("########################################################################");
-      System.out.println("\n");
       contactManager = new ContactManager();
     }
     return contactManager;

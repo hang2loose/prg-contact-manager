@@ -6,14 +6,19 @@ import contact.model.ContactCard;
 import contact.model.Person;
 import contact.repository.ContactRepository;
 
-public class DummyDataCreator {
+class DummyDataCreator {
 
-  public static void createDummyContacts(ContactRepository repository) {
+  private DummyDataCreator() {
+  }
+
+  static void createDummyContacts(ContactRepository repository) {
 
     ContactCard contact1 = ContactCard.getContactCardBuilder()
         .withPerson(
             Person
                 .getPersonBuilder()
+                .withName("Burggraf")
+                .withSurname("Marco")
                 .withBirthdate("10.10.10")
                 .build())
         .withAddress(

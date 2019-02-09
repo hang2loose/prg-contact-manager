@@ -1,18 +1,47 @@
 package contact;
 
-import contact.model.ContactCard;
-import java.util.HashMap;
+import contact.services.ContactCardService;
 
 enum StateOfManager {
-  GET_INPUT, GET_COMMAND
+  GET_INPUT, GET_COMMAND, END, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
 
   private static ContactManager contactManager = null;
-  private static InputHandler inputHandler = null;
+  private static InputHandler inputHandler;
+  private static ContactCardService contactCardService;
 
   private ContactManager() {
+  }
+
+
+  private StateOfManager stateOfManager = StateOfManager.GET_COMMAND;
+
+  public boolean runContactManager() {
+    while (true) {
+      switch (stateOfManager) {
+        case GET_COMMAND:
+          stateOfManager = StateOfManager.GET_INPUT;
+          break;
+        case GET_INPUT:
+          stateOfManager = inputHandler.getInput(stateOfManager);
+          break;
+        case GET_ALL_CONTACTS:
+          System.out.println(contactCardService.getAllLastNames());
+          stateOfManager = StateOfManager.GET_INPUT;
+          break;
+        case END:
+        default:
+          return false;
+      }
+    }
+  }
+
+  private static void clear() {
+    for (int i = 0; i < 5; i++) {
+      System.out.println();
+    }
   }
 
   public static ContactManager getInstance() {
@@ -27,42 +56,9 @@ public class ContactManager {
       System.out.println("\n");
       contactManager = new ContactManager();
       inputHandler = new InputHandler();
+      contactCardService = new ContactCardService();
+      contactCardService.initRepoWithDummyData();
     }
     return contactManager;
-  }
-
-  HashMap<Integer, ContactCard> contactCardRepo = new HashMap<>();
-
-  private StateOfManager stateOfManager = StateOfManager.GET_COMMAND;
-
-  public boolean runContactManager() {
-    while (true) {
-      switch (stateOfManager) {
-        case GET_COMMAND:
-          prtintCommands();
-          stateOfManager = StateOfManager.GET_INPUT;
-          break;
-        case GET_INPUT:
-          stateOfManager = inputHandler.getInput(stateOfManager);
-          break;
-        default:
-          return false;
-      }
-    }
-  }
-
-  private static void prtintCommands() {
-    System.out.println("[A] Alle Kontakte anzeigen");
-    System.out.println("[N] Neuen Kontakt erstellen");
-    System.out.println("[K] Kontakt bearbeiten");
-    System.out.println("[D] Kontaktdetails erstellen");
-    System.out.println("[L] Kontakt loeschen");
-    System.out.println("[B] Beenden");
-  }
-
-  private static void clear() {
-    for (int i = 0; i < 5; i++) {
-      System.out.println();
-    }
   }
 }

@@ -2,20 +2,28 @@ package contact.model;
 
 public class CommunicationBuilder {
 
-  private Communication CommunicationUnderConstruction = new Communication();
+  private Communication communicationUnderConstruction;
+
+  public CommunicationBuilder() {
+    this.communicationUnderConstruction = new Communication();
+  }
+
+  public CommunicationBuilder(Communication communicationUnderConstruction) {
+    this.communicationUnderConstruction = communicationUnderConstruction;
+  }
 
   public CommunicationBuilder withPhone(String phone) {
-    CommunicationUnderConstruction.phone = phone;
+    communicationUnderConstruction.phone = phone;
     return this;
   }
 
   public CommunicationBuilder withMail(String mail) {
-    CommunicationUnderConstruction.mail = mail;
+    communicationUnderConstruction.mail = mail;
     return this;
   }
 
   public Communication build() {
-    return CommunicationUnderConstruction;
+    return communicationUnderConstruction;
   }
 
 }

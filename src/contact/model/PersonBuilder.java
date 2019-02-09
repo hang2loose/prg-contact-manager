@@ -2,7 +2,15 @@ package contact.model;
 
 public class PersonBuilder {
 
-  private Person personUnderConstruction = new Person();
+  private Person personUnderConstruction;
+
+  public PersonBuilder() {
+    this.personUnderConstruction = new Person();
+  }
+
+  public PersonBuilder(Person personUnderConstruction) {
+    this.personUnderConstruction = personUnderConstruction;
+  }
 
   public PersonBuilder withName(String name) {
     personUnderConstruction.name = name;

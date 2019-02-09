@@ -2,7 +2,15 @@ package contact.model;
 
 public class ContactCardBuilder {
 
-  private ContactCard contactCardUnderConstruction = new ContactCard();
+  private ContactCard contactCardUnderConstruction;
+
+  public ContactCardBuilder() {
+    this.contactCardUnderConstruction = new ContactCard();
+  }
+
+  public ContactCardBuilder(ContactCard contactCardUnderConstruction) {
+    this.contactCardUnderConstruction = contactCardUnderConstruction;
+  }
 
   public ContactCardBuilder withAddress(Address address) {
     contactCardUnderConstruction.address = address;

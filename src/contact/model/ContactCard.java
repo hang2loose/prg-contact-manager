@@ -15,7 +15,19 @@ public class ContactCard {
   }
 
   public UUID getUID() {
-    return this.id;
+    return id;
+  }
+
+  public Address getAddress() {
+    return address;
+  }
+
+  public Communication getCommunication() {
+    return communication;
+  }
+
+  public Person getPerson() {
+    return person;
   }
 
   public static ContactCardBuilder getContactCardBuilder() {

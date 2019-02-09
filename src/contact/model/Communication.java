@@ -8,6 +8,14 @@ public class Communication {
   Communication() {
   }
 
+  public String getPhone() {
+    return phone;
+  }
+
+  public String getMail() {
+    return mail;
+  }
+
   public static CommunicationBuilder getCommunicationBuilder() {
     return new CommunicationBuilder();
   }

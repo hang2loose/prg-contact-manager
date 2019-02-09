@@ -32,6 +32,26 @@ public class Person {
   Person() {
   }
 
+  public String getSurname() {
+    return surname;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public String getBirthday() {
+    return birthday;
+  }
+
+  public Gender getGender() {
+    return gender;
+  }
+
   public static PersonBuilder getPersonBuilder() {
     return new PersonBuilder();
   }

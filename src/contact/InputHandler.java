@@ -10,7 +10,7 @@ class InputHandler {
   StateOfManager getInput(StateOfManager state) {
     prtintCommands();
 
-    System.out.print(">");
+    System.out.print("> ");
 
     //TODO throw exception if string is longer than 1;
     char command = scanner.nextLine().toLowerCase().charAt(0);

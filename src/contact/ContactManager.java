@@ -34,6 +34,7 @@ public class ContactManager {
           break;
         case GET_ALL_CONTACTS:
           clear();
+          TableManager.firstTableRow();
           System.out.println(contactCardService.getAllLastNames());
           stateOfManager = StateOfManager.GET_COMMAND;
           break;

@@ -1,67 +1,72 @@
 package contact;
 
-import java.util.HashMap;
+import contact.services.ContactCardService;
 
 enum StateOfManager {
-  GET_INPUT, GET_COMMAND
+  GET_INPUT, GET_COMMAND, END, INIT, NOT_IMPLEMENTET_YET, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
 
   private static ContactManager contactManager = null;
-  private static InputHandler inputHandler = null;
+
+  private InputHandler inputHandler;
+  private ContactCardService contactCardService;
 
   private ContactManager() {
+    inputHandler = new InputHandler();
+    contactCardService = new ContactCardService();
+    contactCardService.initRepoWithDummyData();
+  }
+
+
+  private StateOfManager stateOfManager = StateOfManager.INIT;
+
+  public void runContactManager() {
+    while (true) {
+      switch (stateOfManager) {
+        case INIT:
+          start();
+          stateOfManager = StateOfManager.GET_COMMAND;
+          break;
+        case GET_COMMAND:
+          stateOfManager = inputHandler.getInput(stateOfManager);
+          break;
+        case GET_ALL_CONTACTS:
+          clear();
+          TableManager.firstTableRow();
+          System.out.println(contactCardService.getAllLastNames());
+          stateOfManager = StateOfManager.GET_COMMAND;
+          break;
+        case NOT_IMPLEMENTET_YET:
+          clear();
+          System.out.println("This method is not implementet yet!!!!!!!!!!!!!!!!");
+          stateOfManager = StateOfManager.GET_COMMAND;
+          break;
+        case END:
+        default:
+          return;
+      }
+    }
+  }
+
+  private void start() {
+    System.out.println("########################################################################");
+    System.out.println("#                         Contact Manager v1.0                         #");
+    System.out.println("########################################################################");
+  }
+
+  private static void clear() {
+    for (int i = 0; i < 8; i++) {
+      System.out.println();
+    }
   }
 
   public static ContactManager getInstance() {
 
     if (contactManager == null) {
-      System.out
-          .println("########################################################################");
-      System.out
-          .println("#                         Contact Manager v1.0                         #");
-      System.out
-          .println("########################################################################");
-      System.out.println("\n");
       contactManager = new ContactManager();
-      inputHandler = new InputHandler();
     }
     return contactManager;
-  }
-
-  HashMap<Integer, ContactCard> contactCardRepo = new HashMap<>();
-
-  private StateOfManager stateOfManager = StateOfManager.GET_COMMAND;
-
-  public boolean runContactManager() {
-    while (true) {
-      switch (stateOfManager) {
-        case GET_COMMAND:
-          prtintCommands();
-          stateOfManager = StateOfManager.GET_INPUT;
-          break;
-        case GET_INPUT:
-          stateOfManager = inputHandler.getInput(stateOfManager);
-          break;
-        default:
-          return false;
-      }
-    }
-  }
-
-  private static void prtintCommands() {
-    System.out.println("[A] Alle Kontakte anzeigen");
-    System.out.println("[N] Neuen Kontakt erstellen");
-    System.out.println("[K] Kontakt bearbeiten");
-    System.out.println("[D] Kontaktdetails erstellen");
-    System.out.println("[L] Kontakt loeschen");
-    System.out.println("[B] Beenden");
-  }
-
-  private static void clear() {
-    for (int i = 0; i < 5; i++) {
-      System.out.println();
-    }
   }
 }

@@ -28,3 +28,4 @@ hs_err_pid*
 # idea directoriy
 .idea
 out/production/Programmieren_I/META-INF/Programmieren_I.kotlin_module
+out/

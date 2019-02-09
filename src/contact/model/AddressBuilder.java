@@ -2,35 +2,44 @@ package contact.model;
 
 public class AddressBuilder {
 
-  private Address addressUnderConstruction = new Address();
+  private Address addressUnderConstruction;
 
-  AddressBuilder withCountry(String country) {
+  AddressBuilder() {
+    this.addressUnderConstruction = new Address();
+  }
+
+  AddressBuilder(Address addressUnderConstruction) {
+    this.addressUnderConstruction = addressUnderConstruction;
+  }
+
+  public AddressBuilder withCountry(String country) {
     addressUnderConstruction.country = country;
     return this;
   }
 
-  AddressBuilder withCity(String city) {
+  public AddressBuilder withCity(String city) {
     addressUnderConstruction.city = city;
     return this;
   }
 
-  AddressBuilder withZipCode(String zipCode) {
+  public AddressBuilder withZipCode(String zipCode) {
     addressUnderConstruction.zipCode = zipCode;
     return this;
   }
 
-  AddressBuilder withStreet(String street) {
+  public AddressBuilder withStreet(String street) {
     addressUnderConstruction.street = street;
     return this;
   }
 
-  AddressBuilder withStreetNumber(String streetNumber) {
+  public AddressBuilder withStreetNumber(String streetNumber) {
     addressUnderConstruction.streetNumber = streetNumber;
     return this;
   }
 
-  Address build() {
+  public Address build() {
     return addressUnderConstruction;
   }
+
 
 }

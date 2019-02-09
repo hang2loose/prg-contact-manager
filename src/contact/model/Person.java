@@ -21,18 +21,38 @@ enum Gender {
 }
 
 public class Person {
-  String surname;
-  String name;
+  String surname = "";
+  String name = "";
 
-  String title;
-  String birthday;
+  String title = "";
+  String birthday = "";                 // TODO to LocalDate;
 
-  Gender gender;
+  Gender gender = Gender.NONE;
 
   Person() {
   }
 
-  public PersonBuilder getPersonBuilder() {
+  public String getSurname() {
+    return surname;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public String getBirthday() {
+    return birthday;
+  }
+
+  public Gender getGender() {
+    return gender;
+  }
+
+  public static PersonBuilder getPersonBuilder() {
     return new PersonBuilder();
   }
 }

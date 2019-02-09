@@ -14,8 +14,8 @@ public class ContactCardService {
     this.contactRepository = new ContactRepositoryImpl();
   }
 
-  public boolean addContactCardToRepo(ContactCard contactCard) {
-    return false;
+  public void addContactCardToRepo(ContactCard contactCard) {
+    contactRepository.save(contactCard);
   }
 
   // TODO delete this method

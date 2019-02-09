@@ -12,7 +12,7 @@ class InputHandler {
 
     System.out.print(">");
 
-    // TODO throw exception if string is longer than 1;
+    //TODO throw exception if string is longer than 1;
     char command = scanner.nextLine().toLowerCase().charAt(0);
 
     switch (command) {

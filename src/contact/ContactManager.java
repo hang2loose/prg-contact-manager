@@ -28,6 +28,7 @@ public class ContactManager {
         case INIT:
           start();
           stateOfManager = StateOfManager.GET_COMMAND;
+          break;
         case GET_COMMAND:
           stateOfManager = inputHandler.getInput(stateOfManager);
           break;

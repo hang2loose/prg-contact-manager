@@ -8,9 +8,11 @@ import java.util.UUID;
 public interface ContactRepository {
 
   ContactCard getContactByID(UUID id);
+
   Collection<ContactCard> getAllContacts();
 
   void save(ContactCard contactCard);
+
   void saveAll(List<ContactCard> contactCardList);
 
   void deleteContactCard(UUID id);

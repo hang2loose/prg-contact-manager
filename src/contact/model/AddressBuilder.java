@@ -2,7 +2,15 @@ package contact.model;
 
 public class AddressBuilder {
 
-  private Address addressUnderConstruction = new Address();
+  private Address addressUnderConstruction;
+
+  AddressBuilder() {
+    this.addressUnderConstruction = new Address();
+  }
+
+  AddressBuilder(Address addressUnderConstruction) {
+    this.addressUnderConstruction = addressUnderConstruction;
+  }
 
   public AddressBuilder withCountry(String country) {
     addressUnderConstruction.country = country;

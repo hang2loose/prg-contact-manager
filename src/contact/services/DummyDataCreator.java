@@ -33,8 +33,25 @@ class DummyDataCreator {
             .withMail("mail@mail.de")
             .build())
         .build();
-
     repository.save(contact1);
+
+    ContactCard contact2 = ContactCard.getContactCardBuilder()
+        .withPerson(Person.getPersonBuilder()
+            .withName("Elsner")
+            .withSurname("Dorothee")
+            .build())
+        .withCommunication(Communication.getCommunicationBuilder()
+            .withMail("diri_elsi@gmx.de)")
+            .withPhone("07665 112233").build())
+        .withAddress(Address.getAddressBuilder()
+            .withCity("HomeTown")
+            .withZipCode("79227")
+            .withStreet("Laternenstrasse 1")
+            .withStreetNumber("1")
+            .build())
+        .build();
+    repository.save(contact2);
+
 
   }
 

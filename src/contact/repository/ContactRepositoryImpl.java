@@ -1,23 +1,16 @@
 package contact.repository;
 
-import contact.ContactManager;
 import contact.model.ContactCard;
 import java.util.HashMap;
 import java.util.UUID;
 
 public class ContactRepositoryImpl implements ContactRepository {
 
-  private ContactManager contactManager;
-
   private HashMap<UUID, ContactCard> contactCardMap = new HashMap<>();
 
-  public ContactRepositoryImpl(ContactManager contactManager) {
-    this.contactManager = contactManager;
-  }
-
   @Override
-  public ContactCard getContactByID(int id) {
-    return null;
+  public ContactCard getContactByID(UUID id) {
+    return contactCardMap.getOrDefault(id, null);
   }
 
   @Override

@@ -18,13 +18,13 @@ public class ContactRepositoryImpl implements ContactRepository {
 
   @Override
   public void save(ContactCard contactCard) {
-    contactCardMap.put(contactCard.getUID(), contactCard);
+    contactCardMap.put(contactCard.getUid(), contactCard);
   }
 
   @Override
   public void saveAll(List<ContactCard> contactCardList) {
     contactCardList
-        .forEach(contactCard -> contactCardMap.put(contactCard.getUID(), contactCard));
+        .forEach(contactCard -> contactCardMap.put(contactCard.getUid(), contactCard));
   }
 
   @Override

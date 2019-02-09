@@ -11,6 +11,10 @@ public class ContactCard {
   Person person;
 
   ContactCard() {
+    this.id = UUID.randomUUID();
   }
 
+  public UUID getUID() {
+    return this.id;
+  }
 }

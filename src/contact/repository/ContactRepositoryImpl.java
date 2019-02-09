@@ -2,10 +2,14 @@ package contact.repository;
 
 import contact.ContactManager;
 import contact.model.ContactCard;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class ContactRepositoryImpl implements ContactRepository {
 
   private ContactManager contactManager;
+
+  private HashMap<UUID, ContactCard> contactCardMap = new HashMap<>();
 
   public ContactRepositoryImpl(ContactManager contactManager) {
     this.contactManager = contactManager;
@@ -17,7 +21,7 @@ public class ContactRepositoryImpl implements ContactRepository {
   }
 
   @Override
-  public boolean save(ContactCard contactCard) {
-    return false;
+  public void save(ContactCard contactCard) {
+    contactCardMap.put(contactCard.getUID(), contactCard);
   }
 }

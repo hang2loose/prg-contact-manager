@@ -1,5 +1,6 @@
 package contact.services;
 
+import contact.model.ContactCard;
 import contact.repository.ContactRepository;
 
 // TODO implement as Singleton
@@ -12,4 +13,12 @@ public class ContactCardService {
   }
 
 
+  public boolean addContactCardToRepo(ContactCard contactCard) {
+
+    return false;
+  }
+
+  public void initRepoWithDummyData() {
+
+  }
 }

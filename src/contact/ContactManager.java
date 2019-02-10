@@ -50,6 +50,7 @@ public class ContactManager {
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case END:
+          System.out.println("Auf Wiedersehen!");
         default:
           return;
       }

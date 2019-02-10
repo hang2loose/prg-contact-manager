@@ -1,6 +1,8 @@
 package contact;
 
+import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Optional;
 import java.util.Scanner;
 
 class InputHandler {
@@ -19,7 +21,7 @@ class InputHandler {
       case 'a':
         return StateOfManager.GET_ALL_CONTACTS;
       case 'n':
-        return StateOfManager.NOT_IMPLEMENTET_YET;
+        return StateOfManager.CREATE_NEW_CONTACT;
       case 'k':
         return StateOfManager.NOT_IMPLEMENTET_YET;
       case 'd':
@@ -30,6 +32,60 @@ class InputHandler {
         return StateOfManager.NOT_IMPLEMENTET_YET;
       default:
         throw new InputMismatchException("The givin imput [" + command + "] is not a command");
+    }
+  }
+
+  public Optional<HashMap<String, String>> getNewContactInformations() {
+    HashMap<String, String> newContactInformations = new HashMap<>();
+    System.out.print("Vorname: ");
+    newContactInformations.put("surname", scanner.nextLine());
+    System.out.println();
+
+    System.out.print("Nachname: ");
+    newContactInformations.put("name", scanner.nextLine());
+    System.out.println();
+
+    System.out.print("Telefon: ");
+    newContactInformations.put("phoneNumber", scanner.nextLine());
+    System.out.println();
+
+    System.out.print("eMail: ");
+    newContactInformations.put("eMail", scanner.nextLine());
+    System.out.println();
+
+    System.out.print("Strasse: ");
+    newContactInformations.put("street", scanner.nextLine());
+    System.out.println();
+
+    System.out.print("PLZ: ");
+    newContactInformations.put("zip", scanner.nextLine());
+    System.out.println();
+
+    System.out.print("Stadt: ");
+    newContactInformations.put("city", scanner.nextLine());
+    System.out.println();
+
+    Optional<Boolean> input = askForComfirmation();
+    while (!input.isPresent()) {
+      System.out.println("Wrong input");
+      input = askForComfirmation();
+    }
+    return input.get() ? Optional.of(newContactInformations) : Optional.empty();
+  }
+
+  private Optional<Boolean> askForComfirmation() {
+    System.out.println("[S] Aenderung speichern ");
+    System.out.println("[A] Abbrechen? ");
+
+    char input = scanner.nextLine().toLowerCase().charAt(0);
+
+    switch (input) {
+      case 'a':
+        return Optional.of(false);
+      case 's':
+        return Optional.of(true);
+      default:
+        return Optional.empty();
     }
   }
 

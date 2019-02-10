@@ -3,7 +3,7 @@ package contact;
 import contact.services.ContactCardService;
 
 enum StateOfManager {
-  GET_INPUT, GET_COMMAND, END, INIT, NOT_IMPLEMENTET_YET, GET_ALL_CONTACTS
+  GET_INPUT, GET_COMMAND, END, INIT, NOT_IMPLEMENTET_YET, CREATE_NEW_CONTACT, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
@@ -36,6 +36,12 @@ public class ContactManager {
           clear();
           TableManager.firstTableRow();
           System.out.println(contactCardService.getAllLastNames());
+          stateOfManager = StateOfManager.GET_COMMAND;
+          break;
+        case CREATE_NEW_CONTACT:
+          inputHandler.getNewContactInformations()
+              .ifPresent(a -> contactCardService.createNewContact(a));
+          TableManager.firstTableRow();
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case NOT_IMPLEMENTET_YET:

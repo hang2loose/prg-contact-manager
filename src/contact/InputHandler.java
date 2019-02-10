@@ -111,6 +111,7 @@ class InputHandler {
         break;
       case DELETE_CONTACT:
         System.out.print("Welchen Kontakt möchten sie löschen? ");
+      default:
     }
     return Integer.valueOf(scanner.nextLine());
   }

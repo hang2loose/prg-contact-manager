@@ -30,7 +30,7 @@ public class ContactManager {
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case GET_COMMAND:
-          stateOfManager = inputHandler.getInput(stateOfManager);
+          stateOfManager = inputHandler.getInput();
           break;
         case GET_ALL_CONTACTS:
           clear();

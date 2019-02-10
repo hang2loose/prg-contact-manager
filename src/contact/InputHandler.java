@@ -7,7 +7,7 @@ class InputHandler {
 
   private Scanner scanner = new Scanner(System.in);
 
-  StateOfManager getInput(StateOfManager state) {
+  StateOfManager getInput() {
     prtintCommands();
 
     System.out.print("> ");

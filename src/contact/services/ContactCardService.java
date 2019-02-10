@@ -38,6 +38,7 @@ public class ContactCardService {
     DummyDataCreator.createDummyContacts(contactRepository);
   }
 
+  // TODO should be removed when the TableManager is working
   public void printContactWithIndex() {
     updateRepresentationMap();
     representationMap.keySet()

@@ -7,6 +7,7 @@ import contact.model.ContactCardBuilder;
 import contact.model.Person;
 import contact.repository.ContactRepository;
 import contact.repository.ContactRepositoryImpl;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -29,7 +30,9 @@ public class ContactCardService {
   }
 
   private void updateRepresentationMap() {
-    List<ContactCard> tmp = contactRepository.getAllContacts();
+    List<ContactCard> tmp = contactRepository.getAllContacts().stream()
+        .sorted(Comparator.comparing(ContactCard::getPersonName, String::compareToIgnoreCase))
+        .collect(Collectors.toList());
     representationMap.clear();
     for (ContactCard contactCard : tmp) {
       representationMap.put(tmp.indexOf(contactCard) + 1, contactCard.getUid());

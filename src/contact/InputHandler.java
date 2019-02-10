@@ -79,7 +79,7 @@ class InputHandler {
   }
 
   private String readParameter() {
-    return scanner.nextLine().toLowerCase();
+    return scanner.nextLine();
   }
 
   private boolean askForComfirmation() {

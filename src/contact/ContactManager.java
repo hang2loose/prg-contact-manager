@@ -3,7 +3,7 @@ package contact;
 import contact.services.ContactCardService;
 
 enum StateOfManager {
-  GET_COMMAND, END, INIT, NOT_IMPLEMENTET_YET, CREATE_NEW_CONTACT, DELETE_CONTACT, EDIT_CONTACT,
+  GET_COMMAND, END, INIT, CREATE_NEW_CONTACT, DELETE_CONTACT, EDIT_CONTACT,
   PRINT_CONTACT_DETAILS, GET_ALL_CONTACTS
 }
 
@@ -34,8 +34,7 @@ public class ContactManager {
           break;
         case GET_ALL_CONTACTS:
           clear();
-          TableManager.firstTableRow();
-          contactCardService.printContactWithIndex();
+          TableManager.printContactsList(contactCardService.getAllCards());
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case CREATE_NEW_CONTACT:
@@ -50,11 +49,6 @@ public class ContactManager {
           break;
         case PRINT_CONTACT_DETAILS:
           stateOfManager = executePrintDetails();
-          break;
-        case NOT_IMPLEMENTET_YET:
-          clear();
-          System.out.println("This method is not implementet yet!!!!!!!!!!!!!!!!");
-          stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case END:
           System.out.println("Auf Wiedersehen!");

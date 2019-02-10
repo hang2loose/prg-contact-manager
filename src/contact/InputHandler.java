@@ -121,7 +121,7 @@ class InputHandler {
         System.out.println("Welchen Kontakt möchten sie ansehen? ");
       default:
     }
-    int input = 0;
+    int input;
     try {
       input = Integer.valueOf(scanner.nextLine());
     } catch (NumberFormatException e) {

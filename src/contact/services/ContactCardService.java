@@ -10,6 +10,7 @@ import contact.repository.ContactRepositoryImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 // TODO implement as Singleton
 public class ContactCardService {
@@ -40,15 +41,6 @@ public class ContactCardService {
     updateRepresentationMap();
   }
 
-  // TODO should be removed when the TableManager is working
-  public void printContactWithIndex() {
-    updateRepresentationMap();
-    representationMap.keySet()
-        .forEach(a -> System.out.println(
-            a + " " + contactRepository.getContactById(getUuidFromIndex(a)).getPerson()
-                .getName()));
-  }
-
   public void createNewContact(HashMap<String, String> newContactInformations) {
     if (newContactInformations.isEmpty()) {
       return;
@@ -70,9 +62,8 @@ public class ContactCardService {
 
   public void deleteContactByIndex(int contactIndex) {
     if (repoContainsIndex(contactIndex)) {
-      return;
+      contactRepository.deleteContactCard(getUuidFromIndex(contactIndex));
     }
-    contactRepository.deleteContactCard(getUuidFromIndex(contactIndex));
   }
 
   private ContactCard fillContact(ContactCardBuilder cardBuilder,
@@ -106,5 +97,12 @@ public class ContactCardService {
 
   public ContactCard getContactCardFromIndex(int contactIndex) {
     return contactRepository.getContactById(getUuidFromIndex(contactIndex));
+  }
+
+  public List<ContactCard> getAllCards() {
+    updateRepresentationMap();
+    return representationMap.keySet().stream().sorted()
+        .map(this::getContactCardFromIndex)
+        .collect(Collectors.toList());
   }
 }

@@ -39,11 +39,6 @@ public class ContactRepositoryImpl implements ContactRepository {
   }
 
   @Override
-  public void editContactCard(UUID id, ContactCard contactCard) {
-    contactCardMap.put(id, contactCard);
-  }
-
-  @Override
   public Collection<ContactCard> getContactCardWithLastName(String name) {
     return contactCardMap.values().stream()
         .filter(contactCard -> name.equalsIgnoreCase(contactCard.getPerson().getName()))

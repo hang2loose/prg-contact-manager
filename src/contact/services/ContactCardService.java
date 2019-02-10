@@ -20,6 +20,7 @@ public class ContactCardService {
 
   public ContactCardService() {
     this.contactRepository = new ContactRepositoryImpl();
+    updateRepresentationMap();
   }
 
   public HashMap<Integer, UUID> getRepresentationMap() {
@@ -30,20 +31,22 @@ public class ContactCardService {
     List<ContactCard> tmp = contactRepository.getAllContacts();
     representationMap.clear();
     for (ContactCard contactCard : tmp) {
-      representationMap.put(tmp.indexOf(contactCard), contactCard.getUid());
+      representationMap.put(tmp.indexOf(contactCard) + 1, contactCard.getUid());
     }
   }
 
   public void initRepoWithDummyData() {
     DummyDataCreator.createDummyContacts(contactRepository);
+    updateRepresentationMap();
   }
 
   // TODO should be removed when the TableManager is working
   public void printContactWithIndex() {
     updateRepresentationMap();
     representationMap.keySet()
-        .forEach(a -> System.out.println(a + " " +
-            contactRepository.getContactByID(representationMap.get(a)).getPerson().getName()));
+        .forEach(a -> System.out.println(
+            a + " " + contactRepository.getContactById(getUuidFromIndex(a)).getPerson()
+                .getName()));
   }
 
   public void createNewContact(HashMap<String, String> newContactInformations) {
@@ -52,25 +55,24 @@ public class ContactCardService {
     }
     ContactCard newContactCard =
         fillContact(ContactCard.getContactCardBuilder(), newContactInformations);
-    contactRepository.save(newContactCard);
+    saveToRepository(newContactCard);
   }
 
   public void editContactById(int contactIndex, HashMap<String, String> newContactInformations) {
-    if (!(contactIndex > representationMap.size() || newContactInformations.isEmpty())) {
+    if ((repoContainsIndex(contactIndex) && !newContactInformations.isEmpty())) {
       ContactCard oldContactCard =
-          contactRepository.getContactByID(representationMap.get(contactIndex));
-
+          contactRepository.getContactById(getUuidFromIndex(contactIndex));
       ContactCard newContactCard =
-          fillContact(ContactCard.getEditContactCard(oldContactCard), newContactInformations);
-      contactRepository.save(newContactCard);
+          fillContact(oldContactCard.getEditContactCard(), newContactInformations);
+      saveToRepository(newContactCard);
     }
   }
 
   public boolean deleteContactByIndex(int contactIndex) {
-    if (contactIndex > representationMap.size()) {
+    if (repoContainsIndex(contactIndex)) {
       return false;
     }
-    contactRepository.deleteContactCard(representationMap.get(contactIndex));
+    contactRepository.deleteContactCard(getUuidFromIndex(contactIndex));
     return true;
   }
 
@@ -89,5 +91,17 @@ public class ContactCardService {
             .withPhone(newContactInformations.get("phoneNumber"))
             .withMail(newContactInformations.get("eMail")).build())
         .build();
+  }
+
+  public boolean repoContainsIndex(int contactIndex) {
+    return representationMap.containsKey(contactIndex);
+  }
+
+  private UUID getUuidFromIndex(int contactIndex) {
+    return representationMap.get(contactIndex);
+  }
+
+  private void saveToRepository(ContactCard newContactCard) {
+    contactRepository.save(newContactCard);
   }
 }

@@ -43,18 +43,10 @@ public class ContactManager {
           stateOfManager = StateOfManager.GET_ALL_CONTACTS;
           break;
         case DELETE_CONTACT:
-          if (contactCardService
-              .deleteContactByIndex(inputHandler.getContactIndex(stateOfManager))) {
-            System.out.println("Erfolgreich gelöscht!!!!!!");
-          } else {
-            System.out.println("Kontakt nicht gefunden!");
-          }
-          stateOfManager = StateOfManager.GET_ALL_CONTACTS;
+          stateOfManager = executeDeleteContact();
           break;
         case EDIT_CONTACT:
-          contactCardService.editContactById(inputHandler.getContactIndex(stateOfManager),
-              inputHandler.getNewContactInformations());
-          stateOfManager = StateOfManager.GET_ALL_CONTACTS;
+          stateOfManager = executeEditContact();
           break;
         case NOT_IMPLEMENTET_YET:
           clear();
@@ -68,6 +60,28 @@ public class ContactManager {
           throw new IllegalStateException("Something went terrible Wrong Sorry for that");
       }
     }
+  }
+
+  private StateOfManager executeDeleteContact() {
+    int indexId = inputHandler.getContactIndex(StateOfManager.DELETE_CONTACT);
+
+    if (contactCardService.repoContainsIndex(indexId)) {
+      contactCardService.deleteContactByIndex(indexId);
+      return StateOfManager.GET_ALL_CONTACTS;
+    }
+    System.out.println("Kontakt nicht gefunden!");
+    return StateOfManager.GET_COMMAND;
+  }
+
+  private StateOfManager executeEditContact() {
+    int indexId = inputHandler.getContactIndex(StateOfManager.EDIT_CONTACT);
+
+    if (contactCardService.repoContainsIndex(indexId)) {
+      contactCardService.editContactById(indexId, inputHandler.getNewContactInformations());
+      return StateOfManager.GET_ALL_CONTACTS;
+    }
+    System.out.println("Index not found!!!!");
+    return StateOfManager.GET_COMMAND;
   }
 
   private void start() {

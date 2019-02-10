@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface ContactRepository {
 
-  ContactCard getContactByID(UUID id);
+  ContactCard getContactById(UUID id);
 
   List<ContactCard> getAllContacts();
 
@@ -22,6 +22,8 @@ public interface ContactRepository {
   Collection<ContactCard> getContactCardWithLastName(String name);
 
   Collection<ContactCard> getContactCardWithSurName(String surName);
+
+  int getSizeOfRepo();
 
 
 }

@@ -30,11 +30,11 @@ public class ContactCard {
     return person;
   }
 
-  public static ContactCardBuilder getContactCardBuilder() {
-    return new ContactCardBuilder();
+  public ContactCardBuilder getEditContactCard() {
+    return new ContactCardBuilder(this);
   }
 
-  public static ContactCardBuilder getEditContactCard(ContactCard contactCard) {
-    return new ContactCardBuilder(contactCard);
+  public static ContactCardBuilder getContactCardBuilder() {
+    return new ContactCardBuilder();
   }
 }

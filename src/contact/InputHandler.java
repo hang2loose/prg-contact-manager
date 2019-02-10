@@ -45,37 +45,41 @@ class InputHandler {
   HashMap<String, String> getNewContactInformations() {
     HashMap<String, String> newContactInformations = new HashMap<>();
     System.out.print("Vorname: ");
-    newContactInformations.put("surname", scanner.nextLine());
+    newContactInformations.put("surname", readParameter());
     System.out.println();
 
     System.out.print("Nachname: ");
-    newContactInformations.put("name", scanner.nextLine());
+    newContactInformations.put("name", readParameter());
     System.out.println();
 
     System.out.print("Telefon: ");
-    newContactInformations.put("phoneNumber", scanner.nextLine());
+    newContactInformations.put("phoneNumber", readParameter());
     System.out.println();
 
     System.out.print("eMail: ");
-    newContactInformations.put("eMail", scanner.nextLine());
+    newContactInformations.put("eMail", readParameter());
     System.out.println();
 
     System.out.print("Strasse: ");
-    newContactInformations.put("street", scanner.nextLine());
+    newContactInformations.put("street", readParameter());
     System.out.println();
 
     System.out.print("PLZ: ");
-    newContactInformations.put("zip", scanner.nextLine());
+    newContactInformations.put("zip", readParameter());
     System.out.println();
 
     System.out.print("Stadt: ");
-    newContactInformations.put("city", scanner.nextLine());
+    newContactInformations.put("city", readParameter());
     System.out.println();
 
     if (!askForComfirmation()) {
       newContactInformations.clear();
     }
     return newContactInformations;
+  }
+
+  private String readParameter() {
+    return scanner.nextLine().toLowerCase();
   }
 
   private boolean askForComfirmation() {
@@ -90,18 +94,19 @@ class InputHandler {
       case 's':
         return true;
       default:
+        System.out.println("Character not an Command!");
         return askForComfirmation();
     }
   }
 
   private char getCharacterCommand() {
-    try {
-      return scanner.nextLine().toLowerCase().charAt(0);
-    } catch (StringIndexOutOfBoundsException e) {
-      System.out.println("please insert a character as command!!!!");
-      getCharacterCommand();
+    String inputString = scanner.nextLine().toLowerCase();
+    if (inputString.length() == 1) {
+      return inputString.charAt(0);
     }
-    return ' ';
+    System.out.println("please insert a character as command!!!!\n ");
+    getCharacterCommand();
+    return 0;
   }
 
   int getContactIndex(StateOfManager state) {
@@ -111,8 +116,16 @@ class InputHandler {
         break;
       case DELETE_CONTACT:
         System.out.print("Welchen Kontakt möchten sie löschen? ");
+        break;
       default:
     }
-    return Integer.valueOf(scanner.nextLine());
+    int input = 0;
+    try {
+      input = Integer.valueOf(scanner.nextLine());
+    } catch (NumberFormatException e) {
+      System.out.println("Bitte nur Zahlen eingeben!!!\n ");
+      getContactIndex(state);
+    }
+    return input;
   }
 }

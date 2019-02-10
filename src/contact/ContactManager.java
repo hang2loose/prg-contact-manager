@@ -3,7 +3,7 @@ package contact;
 import contact.services.ContactCardService;
 
 enum StateOfManager {
-  GET_INPUT, GET_COMMAND, END, INIT, NOT_IMPLEMENTET_YET, CREATE_NEW_CONTACT, GET_ALL_CONTACTS
+  GET_COMMAND, END, INIT, NOT_IMPLEMENTET_YET, CREATE_NEW_CONTACT, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
@@ -53,7 +53,7 @@ public class ContactManager {
           System.out.println("Auf Wiedersehen!");
           return;
         default:
-          throw new RuntimeException("Something went terrible Wrong Sorry for that");
+          throw new IllegalStateException("Something went terrible Wrong Sorry for that");
       }
     }
   }

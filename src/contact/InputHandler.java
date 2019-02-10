@@ -11,8 +11,6 @@ class InputHandler {
     prtintCommands();
 
     System.out.print("> ");
-
-    //TODO throw exception if string is longer than 1;
     char command = getCharacterCommand();
 
     switch (command) {
@@ -29,8 +27,8 @@ class InputHandler {
       case 'b':
         return StateOfManager.END;
       default:
+        System.out.println(command + " is not an valid command for this Manager");
         return StateOfManager.GET_COMMAND;
-      //throw new InputMismatchException("The givin imput [" + command + "] is not a command");
     }
   }
 
@@ -44,7 +42,7 @@ class InputHandler {
     System.out.println("[B] Beenden");
   }
 
-  public HashMap<String, String> getNewContactInformations() {
+  HashMap<String, String> getNewContactInformations() {
     HashMap<String, String> newContactInformations = new HashMap<>();
     System.out.print("Vorname: ");
     newContactInformations.put("surname", scanner.nextLine());
@@ -106,7 +104,7 @@ class InputHandler {
     return ' ';
   }
 
-  public int getContactIndex(StateOfManager state) {
+  int getContactIndex(StateOfManager state) {
     switch (state) {
       case EDIT_CONTACT:
         System.out.print("Welchen Kontakt möchten sie bearbeiten? ");

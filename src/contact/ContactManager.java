@@ -3,7 +3,7 @@ package contact;
 import contact.services.ContactCardService;
 
 enum StateOfManager {
-  GET_COMMAND, END, INIT, NOT_IMPLEMENTET_YET, CREATE_NEW_CONTACT, GET_ALL_CONTACTS
+  GET_COMMAND, END, INIT, NOT_IMPLEMENTET_YET, CREATE_NEW_CONTACT, DELETE_CONTACT, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
@@ -41,6 +41,14 @@ public class ContactManager {
           inputHandler.getNewContactInformations()
               .ifPresent(a -> contactCardService.createNewContact(a));
           TableManager.firstTableRow();
+          stateOfManager = StateOfManager.GET_COMMAND;
+          break;
+        case DELETE_CONTACT:
+          if (contactCardService.deleteContactByIndex(inputHandler.getContactIndex())) {
+            System.out.println("Erfolgreich gelöscht!!!!!!");
+          } else {
+            System.out.println("Kontakt nicht gefunden!");
+          }
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case NOT_IMPLEMENTET_YET:

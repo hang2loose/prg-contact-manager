@@ -69,4 +69,12 @@ public class ContactCardService {
         .forEach(a -> System.out.println(a + " " +
             contactRepository.getContactByID(representationMap.get(a)).getPerson().getName()));
   }
+
+  public boolean deleteContactByIndex(int contactIndex) {
+    if (contactIndex > representationMap.size()) {
+      return false;
+    }
+    contactRepository.deleteContactCard(representationMap.get(contactIndex));
+    return true;
+  }
 }

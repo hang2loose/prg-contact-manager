@@ -27,12 +27,22 @@ class InputHandler {
       case 'd':
         return StateOfManager.NOT_IMPLEMENTET_YET;
       case 'l':
-        return StateOfManager.NOT_IMPLEMENTET_YET;
+        return StateOfManager.DELETE_CONTACT;
       case 'b':
         return StateOfManager.END;
       default:
         throw new InputMismatchException("The givin imput [" + command + "] is not a command");
     }
+  }
+
+  private static void prtintCommands() {
+    System.out.println("\n\n");
+    System.out.println("[A] Alle Kontakte anzeigen");
+    System.out.println("[N] Neuen Kontakt erstellen");
+    System.out.println("[K] Kontakt bearbeiten");
+    System.out.println("[D] Kontaktdetails anzeigen");
+    System.out.println("[L] Kontakt loeschen");
+    System.out.println("[B] Beenden");
   }
 
   public Optional<HashMap<String, String>> getNewContactInformations() {
@@ -89,13 +99,8 @@ class InputHandler {
     }
   }
 
-  private static void prtintCommands() {
-    System.out.println("\n\n");
-    System.out.println("[A] Alle Kontakte anzeigen");
-    System.out.println("[N] Neuen Kontakt erstellen");
-    System.out.println("[K] Kontakt bearbeiten");
-    System.out.println("[D] Kontaktdetails erstellen");
-    System.out.println("[L] Kontakt loeschen");
-    System.out.println("[B] Beenden");
+  public int getContactIndex() {
+    System.out.print("Welchen Kontakt möchten sie löschen? ");
+    return Integer.valueOf(scanner.nextLine());
   }
 }

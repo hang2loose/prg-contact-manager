@@ -68,12 +68,11 @@ public class ContactCardService {
     }
   }
 
-  public boolean deleteContactByIndex(int contactIndex) {
+  public void deleteContactByIndex(int contactIndex) {
     if (repoContainsIndex(contactIndex)) {
-      return false;
+      return;
     }
     contactRepository.deleteContactCard(getUuidFromIndex(contactIndex));
-    return true;
   }
 
   private ContactCard fillContact(ContactCardBuilder cardBuilder,
@@ -103,5 +102,9 @@ public class ContactCardService {
 
   private void saveToRepository(ContactCard newContactCard) {
     contactRepository.save(newContactCard);
+  }
+
+  public ContactCard getContactCardFromIndex(int contactIndex) {
+    return contactRepository.getContactById(getUuidFromIndex(contactIndex));
   }
 }

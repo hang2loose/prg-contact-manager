@@ -4,7 +4,7 @@ import contact.services.ContactCardService;
 
 enum StateOfManager {
   GET_COMMAND, END, INIT, NOT_IMPLEMENTET_YET, CREATE_NEW_CONTACT, DELETE_CONTACT, EDIT_CONTACT,
-  GET_ALL_CONTACTS
+  PRINT_CONTACT_DETAILS, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
@@ -48,6 +48,9 @@ public class ContactManager {
         case EDIT_CONTACT:
           stateOfManager = executeEditContact();
           break;
+        case PRINT_CONTACT_DETAILS:
+          stateOfManager = executePrintDetails();
+          break;
         case NOT_IMPLEMENTET_YET:
           clear();
           System.out.println("This method is not implementet yet!!!!!!!!!!!!!!!!");
@@ -60,6 +63,17 @@ public class ContactManager {
           throw new IllegalStateException("Something went terrible Wrong Sorry for that");
       }
     }
+  }
+
+  private StateOfManager executePrintDetails() {
+    int index = inputHandler.getContactIndex(StateOfManager.PRINT_CONTACT_DETAILS);
+
+    if (contactCardService.repoContainsIndex(index)) {
+      TableManager.printContactCard(contactCardService.getContactCardFromIndex(index));
+      return StateOfManager.GET_COMMAND;
+    }
+    System.out.println("Kontakt nicht gefunden!");
+    return StateOfManager.GET_COMMAND;
   }
 
   private StateOfManager executeDeleteContact() {

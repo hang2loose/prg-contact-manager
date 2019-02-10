@@ -21,7 +21,7 @@ class InputHandler {
       case 'k':
         return StateOfManager.EDIT_CONTACT;
       case 'd':
-        return StateOfManager.NOT_IMPLEMENTET_YET;
+        return StateOfManager.PRINT_CONTACT_DETAILS;
       case 'l':
         return StateOfManager.DELETE_CONTACT;
       case 'b':
@@ -117,6 +117,8 @@ class InputHandler {
       case DELETE_CONTACT:
         System.out.print("Welchen Kontakt möchten sie löschen? ");
         break;
+      case PRINT_CONTACT_DETAILS:
+        System.out.println("Welchen Kontakt möchten sie ansehen? ");
       default:
     }
     int input = 0;
@@ -124,7 +126,7 @@ class InputHandler {
       input = Integer.valueOf(scanner.nextLine());
     } catch (NumberFormatException e) {
       System.out.println("Bitte nur Zahlen eingeben!!!\n ");
-      getContactIndex(state);
+      return getContactIndex(state);
     }
     return input;
   }

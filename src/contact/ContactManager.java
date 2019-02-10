@@ -51,8 +51,9 @@ public class ContactManager {
           break;
         case END:
           System.out.println("Auf Wiedersehen!");
-        default:
           return;
+        default:
+          throw new RuntimeException("Something went terrible Wrong Sorry for that");
       }
     }
   }

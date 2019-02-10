@@ -29,7 +29,7 @@ class InputHandler {
       case 'l':
         return StateOfManager.NOT_IMPLEMENTET_YET;
       case 'b':
-        return StateOfManager.NOT_IMPLEMENTET_YET;
+        return StateOfManager.END;
       default:
         throw new InputMismatchException("The givin imput [" + command + "] is not a command");
     }

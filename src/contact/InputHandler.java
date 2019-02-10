@@ -1,8 +1,6 @@
 package contact;
 
 import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Optional;
 import java.util.Scanner;
 
 class InputHandler {
@@ -15,7 +13,7 @@ class InputHandler {
     System.out.print("> ");
 
     //TODO throw exception if string is longer than 1;
-    char command = scanner.nextLine().toLowerCase().charAt(0);
+    char command = getCharacterCommand();
 
     switch (command) {
       case 'a':
@@ -23,7 +21,7 @@ class InputHandler {
       case 'n':
         return StateOfManager.CREATE_NEW_CONTACT;
       case 'k':
-        return StateOfManager.NOT_IMPLEMENTET_YET;
+        return StateOfManager.EDIT_CONTACT;
       case 'd':
         return StateOfManager.NOT_IMPLEMENTET_YET;
       case 'l':
@@ -31,7 +29,8 @@ class InputHandler {
       case 'b':
         return StateOfManager.END;
       default:
-        throw new InputMismatchException("The givin imput [" + command + "] is not a command");
+        return StateOfManager.GET_COMMAND;
+      //throw new InputMismatchException("The givin imput [" + command + "] is not a command");
     }
   }
 
@@ -45,7 +44,7 @@ class InputHandler {
     System.out.println("[B] Beenden");
   }
 
-  public Optional<HashMap<String, String>> getNewContactInformations() {
+  public HashMap<String, String> getNewContactInformations() {
     HashMap<String, String> newContactInformations = new HashMap<>();
     System.out.print("Vorname: ");
     newContactInformations.put("surname", scanner.nextLine());
@@ -75,32 +74,46 @@ class InputHandler {
     newContactInformations.put("city", scanner.nextLine());
     System.out.println();
 
-    Optional<Boolean> input = askForComfirmation();
-    while (!input.isPresent()) {
-      System.out.println("Wrong input");
-      input = askForComfirmation();
+    if (!askForComfirmation()) {
+      newContactInformations.clear();
     }
-    return input.get() ? Optional.of(newContactInformations) : Optional.empty();
+    return newContactInformations;
   }
 
-  private Optional<Boolean> askForComfirmation() {
+  private boolean askForComfirmation() {
     System.out.println("[S] Aenderung speichern ");
     System.out.println("[A] Abbrechen? ");
 
-    char input = scanner.nextLine().toLowerCase().charAt(0);
+    char input = getCharacterCommand();
 
     switch (input) {
       case 'a':
-        return Optional.of(false);
+        return false;
       case 's':
-        return Optional.of(true);
+        return true;
       default:
-        return Optional.empty();
+        return askForComfirmation();
     }
   }
 
-  public int getContactIndex() {
-    System.out.print("Welchen Kontakt möchten sie löschen? ");
+  private char getCharacterCommand() {
+    try {
+      return scanner.nextLine().toLowerCase().charAt(0);
+    } catch (StringIndexOutOfBoundsException e) {
+      System.out.println("please insert a character as command!!!!");
+      getCharacterCommand();
+    }
+    return ' ';
+  }
+
+  public int getContactIndex(StateOfManager state) {
+    switch (state) {
+      case EDIT_CONTACT:
+        System.out.print("Welchen Kontakt möchten sie bearbeiten? ");
+        break;
+      case DELETE_CONTACT:
+        System.out.print("Welchen Kontakt möchten sie löschen? ");
+    }
     return Integer.valueOf(scanner.nextLine());
   }
 }

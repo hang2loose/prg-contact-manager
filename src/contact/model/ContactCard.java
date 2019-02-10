@@ -33,4 +33,8 @@ public class ContactCard {
   public static ContactCardBuilder getContactCardBuilder() {
     return new ContactCardBuilder();
   }
+
+  public static ContactCardBuilder getEditContactCard(ContactCard contactCard) {
+    return new ContactCardBuilder(contactCard);
+  }
 }

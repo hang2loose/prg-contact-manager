@@ -3,13 +3,13 @@ package contact.services;
 import contact.model.Address;
 import contact.model.Communication;
 import contact.model.ContactCard;
+import contact.model.ContactCardBuilder;
 import contact.model.Person;
 import contact.repository.ContactRepository;
 import contact.repository.ContactRepositoryImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 // TODO implement as Singleton
 public class ContactCardService {
@@ -28,7 +28,7 @@ public class ContactCardService {
 
   private void updateRepresentationMap() {
     List<ContactCard> tmp = contactRepository.getAllContacts();
-
+    representationMap.clear();
     for (ContactCard contactCard : tmp) {
       representationMap.put(tmp.indexOf(contactCard), contactCard.getUid());
     }
@@ -38,18 +38,47 @@ public class ContactCardService {
     DummyDataCreator.createDummyContacts(contactRepository);
   }
 
-  public String getAllLastNames() {
-    return contactRepository.getAllContacts().stream()
-        .map(contacts -> contacts.getPerson().getName())
-        .collect(Collectors.toList()).toString();
+  public void printContactWithIndex() {
+    updateRepresentationMap();
+    representationMap.keySet()
+        .forEach(a -> System.out.println(a + " " +
+            contactRepository.getContactByID(representationMap.get(a)).getPerson().getName()));
   }
 
   public void createNewContact(HashMap<String, String> newContactInformations) {
-    ContactCard newContactCard = ContactCard.getContactCardBuilder()
-        .withPerson(Person.getPersonBuilder()
-            .withSurname(newContactInformations.get("surname"))
-            .withName(newContactInformations.get("name"))
-            .build())
+    if (newContactInformations.isEmpty()) {
+      return;
+    }
+    ContactCard newContactCard =
+        fillContact(ContactCard.getContactCardBuilder(), newContactInformations);
+    contactRepository.save(newContactCard);
+  }
+
+  public void editContactById(int contactIndex, HashMap<String, String> newContactInformations) {
+    if (!(contactIndex > representationMap.size() || newContactInformations.isEmpty())) {
+      ContactCard oldContactCard =
+          contactRepository.getContactByID(representationMap.get(contactIndex));
+
+      ContactCard newContactCard =
+          fillContact(ContactCard.getEditContactCard(oldContactCard), newContactInformations);
+      contactRepository.save(newContactCard);
+    }
+  }
+
+  public boolean deleteContactByIndex(int contactIndex) {
+    if (contactIndex > representationMap.size()) {
+      return false;
+    }
+    contactRepository.deleteContactCard(representationMap.get(contactIndex));
+    return true;
+  }
+
+  private ContactCard fillContact(ContactCardBuilder cardBuilder,
+      HashMap<String, String> newContactInformations) {
+    return cardBuilder.withPerson(Person.getPersonBuilder()
+        .withSurname(newContactInformations.get("surname"))
+        .withName(newContactInformations.get("name"))
+        .build())
         .withAddress(Address.getAddressBuilder()
             .withCity(newContactInformations.get("city"))
             .withZipCode(newContactInformations.get("zip"))
@@ -59,22 +88,5 @@ public class ContactCardService {
             .withPhone(newContactInformations.get("phoneNumber"))
             .withMail(newContactInformations.get("eMail")).build())
         .build();
-
-    contactRepository.save(newContactCard);
-  }
-
-  public void printContactWithIndex() {
-    updateRepresentationMap();
-    representationMap.keySet()
-        .forEach(a -> System.out.println(a + " " +
-            contactRepository.getContactByID(representationMap.get(a)).getPerson().getName()));
-  }
-
-  public boolean deleteContactByIndex(int contactIndex) {
-    if (contactIndex > representationMap.size()) {
-      return false;
-    }
-    contactRepository.deleteContactCard(representationMap.get(contactIndex));
-    return true;
   }
 }

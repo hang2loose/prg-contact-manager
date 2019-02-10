@@ -16,11 +16,21 @@ import java.util.stream.Collectors;
 // TODO implement as Singleton
 public class ContactCardService {
 
+  private static ContactCardService contactCardService = null;
+
+  public static ContactCardService getInstance() {
+
+    if (contactCardService == null) {
+      contactCardService = new ContactCardService();
+    }
+    return contactCardService;
+  }
+
   private ContactRepository contactRepository;
 
   private HashMap<Integer, UUID> representationMap = new HashMap<>();
 
-  public ContactCardService() {
+  private ContactCardService() {
     this.contactRepository = new ContactRepositoryImpl();
     updateRepresentationMap();
   }

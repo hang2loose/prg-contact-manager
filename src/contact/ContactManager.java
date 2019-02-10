@@ -16,7 +16,7 @@ public class ContactManager {
 
   private ContactManager() {
     inputHandler = new InputHandler();
-    contactCardService = new ContactCardService();
+    contactCardService = ContactCardService.getInstance();
     contactCardService.initRepoWithDummyData();
   }
 

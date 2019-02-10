@@ -7,6 +7,8 @@ import contact.model.Person;
 import contact.repository.ContactRepository;
 import contact.repository.ContactRepositoryImpl;
 import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 // TODO implement as Singleton
@@ -14,17 +16,22 @@ public class ContactCardService {
 
   private ContactRepository contactRepository;
 
+  private HashMap<Integer, UUID> representationMap = new HashMap<>();
+
   public ContactCardService() {
     this.contactRepository = new ContactRepositoryImpl();
   }
 
-  public void addContactCardToRepo(ContactCard contactCard) {
-    contactRepository.save(contactCard);
+  public HashMap<Integer, UUID> getRepresentationMap() {
+    return representationMap;
   }
 
-  // TODO delete this method
-  public ContactCard getRandomContact() {
-    return (ContactCard) contactRepository.getAllContacts();
+  private void updateRepresentationMap() {
+    List<ContactCard> tmp = contactRepository.getAllContacts();
+
+    for (ContactCard contactCard : tmp) {
+      representationMap.put(tmp.indexOf(contactCard), contactCard.getUid());
+    }
   }
 
   public void initRepoWithDummyData() {
@@ -54,5 +61,12 @@ public class ContactCardService {
         .build();
 
     contactRepository.save(newContactCard);
+  }
+
+  public void printContactWithIndex() {
+    updateRepresentationMap();
+    representationMap.keySet()
+        .forEach(a -> System.out.println(a + " " +
+            contactRepository.getContactByID(representationMap.get(a)).getPerson().getName()));
   }
 }

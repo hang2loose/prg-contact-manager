@@ -19,7 +19,6 @@ public class ContactManager {
     contactCardService.initRepoWithDummyData();
   }
 
-
   private StateOfManager stateOfManager = StateOfManager.INIT;
 
   public void runContactManager() {
@@ -35,7 +34,7 @@ public class ContactManager {
         case GET_ALL_CONTACTS:
           clear();
           TableManager.firstTableRow();
-          System.out.println(contactCardService.getAllLastNames());
+          contactCardService.printContactWithIndex();
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case CREATE_NEW_CONTACT:

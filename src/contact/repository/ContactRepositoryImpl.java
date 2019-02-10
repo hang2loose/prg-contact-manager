@@ -1,6 +1,7 @@
 package contact.repository;
 
 import contact.model.ContactCard;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -28,8 +29,8 @@ public class ContactRepositoryImpl implements ContactRepository {
   }
 
   @Override
-  public Collection<ContactCard> getAllContacts() {
-    return contactCardMap.values();
+  public List<ContactCard> getAllContacts() {
+    return new ArrayList<>(contactCardMap.values());
   }
 
   @Override

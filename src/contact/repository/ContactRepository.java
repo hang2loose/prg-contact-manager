@@ -9,7 +9,7 @@ public interface ContactRepository {
 
   ContactCard getContactByID(UUID id);
 
-  Collection<ContactCard> getAllContacts();
+  List<ContactCard> getAllContacts();
 
   void save(ContactCard contactCard);
 

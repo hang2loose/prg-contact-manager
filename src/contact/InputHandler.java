@@ -94,7 +94,7 @@ class InputHandler {
       case 's':
         return true;
       default:
-        System.out.println("Character not an Command!");
+        System.out.println(input + " Character not an Command!");
         return askForComfirmation();
     }
   }

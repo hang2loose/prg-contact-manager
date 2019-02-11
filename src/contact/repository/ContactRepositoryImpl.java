@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 public class ContactRepositoryImpl implements ContactRepository, Serializable {
 
-  private static final long serialVersionUID = 1L;
   private static ContactRepositoryImpl contactRepositoryImpl = null;
 
   public static ContactRepositoryImpl getInstance() {
@@ -22,7 +21,7 @@ public class ContactRepositoryImpl implements ContactRepository, Serializable {
     return contactRepositoryImpl;
   }
 
-
+  private static final long serialVersionUID = 1L;
   private HashMap<UUID, ContactCard> contactCardMap = new HashMap<>();
 
   private ContactRepositoryImpl() {
@@ -56,14 +55,18 @@ public class ContactRepositoryImpl implements ContactRepository, Serializable {
 
   @Override
   public Collection<ContactCard> getContactCardWithLastName(String name) {
-    return contactCardMap.values().stream()
+    return contactCardMap
+        .values()
+        .stream()
         .filter(contactCard -> name.equalsIgnoreCase(contactCard.getPerson().getName()))
         .collect(Collectors.toList());
   }
 
   @Override
   public Collection<ContactCard> getContactCardWithSurName(String surName) {
-    return contactCardMap.values().stream()
+    return contactCardMap
+        .values()
+        .stream()
         .filter(contactCard -> surName.equalsIgnoreCase(contactCard.getPerson().getSurname()))
         .collect(Collectors.toList());
   }

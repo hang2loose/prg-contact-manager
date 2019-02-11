@@ -11,6 +11,14 @@ public class ContactManager {
 
   private static ContactManager contactManager = null;
 
+  public static ContactManager getInstance() {
+
+    if (contactManager == null) {
+      contactManager = new ContactManager();
+    }
+    return contactManager;
+  }
+
   private InputHandler inputHandler;
   private ContactCardService contactCardService;
 
@@ -60,7 +68,7 @@ public class ContactManager {
           System.out.println("Auf Wiedersehen!");
           return;
         default:
-          throw new IllegalStateException("Something went terrible Wrong Sorry for that");
+          throw new IllegalStateException("Something went terribly wrong SORRY");
       }
     }
   }
@@ -122,13 +130,5 @@ public class ContactManager {
     for (int i = 0; i < 8; i++) {
       System.out.println();
     }
-  }
-
-  public static ContactManager getInstance() {
-
-    if (contactManager == null) {
-      contactManager = new ContactManager();
-    }
-    return contactManager;
   }
 }

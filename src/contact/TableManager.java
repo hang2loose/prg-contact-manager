@@ -16,8 +16,8 @@ class TableManager {
     System.out.println("| " + contactCard.getCommunication().getMail());
     System.out.println();
     System.out.println("| " + contactCard.getAddress().getStreet());
-    System.out.println(
-        "| " + contactCard.getAddress().getZipCode() + " " + contactCard.getAddress().getCity());
+    System.out.println("| " + contactCard.getAddress().getZipCode()
+        + " " + contactCard.getAddress().getCity());
   }
 
   public static void printContactsList(List<ContactCard> contactCardList) {

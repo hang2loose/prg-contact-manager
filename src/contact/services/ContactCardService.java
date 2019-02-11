@@ -158,8 +158,9 @@ public class ContactCardService {
   public boolean getContactsFromFile(String name) {
     try (ObjectInputStream inputStream = new ObjectInputStream(
         new FileInputStream(name + ".ser"))) {
-      ContactCard tmp;
+      ContactCard tmp = (ContactCard) inputStream.readObject();
       do {
+        contactRepository.save(tmp);
         tmp = (ContactCard) inputStream.readObject();
       } while (tmp != null);
     } catch (ClassNotFoundException | IOException exception) {

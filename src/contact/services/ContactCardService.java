@@ -88,7 +88,7 @@ public class ContactCardService {
         .withAddress(Address.getAddressBuilder()
             .withCity(newContactInformations.get("city"))
             .withZipCode(newContactInformations.get("zip"))
-            .withStreet("street")
+            .withStreet(newContactInformations.get("street"))
             .build())
         .withCommunication(Communication.getCommunicationBuilder()
             .withPhone(newContactInformations.get("phoneNumber"))

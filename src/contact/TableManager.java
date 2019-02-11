@@ -37,10 +37,10 @@ class TableManager {
   private static void printCard(ContactCard contactCard, int index) {
     String name = getEllipsis(contactCard.getPerson().getName(), 15);
     String surName = getEllipsis(contactCard.getPerson().getSurname(), 15);
-    ;
     String phone = getEllipsis(contactCard.getCommunication().getPhone(), 20);
     String mail = getEllipsis(contactCard.getCommunication().getMail(), 22);
-    System.out.printf("%d%19s%16s%26s%29s%n", index, surName, name, phone, mail);
+
+    System.out.printf("%d%18s%16s%26s%29s%n", index, surName, name, phone, mail);
   }
 
 

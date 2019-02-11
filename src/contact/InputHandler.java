@@ -27,7 +27,7 @@ class InputHandler {
       case 'r':
         return StateOfManager.NOT_IMPLEMENTET;
       case 's':
-        return StateOfManager.NOT_IMPLEMENTET;
+        return StateOfManager.SAVE_REPOSITORY;
       case 'b':
         return StateOfManager.END;
       default:
@@ -78,10 +78,6 @@ class InputHandler {
     return newContactInformations;
   }
 
-  private String readParameter() {
-    return scanner.nextLine();
-  }
-
   private boolean askForComfirmation() {
     System.out.println("[S] Aenderung speichern ");
     System.out.println("[A] Abbrechen? ");
@@ -129,5 +125,14 @@ class InputHandler {
       return getContactIndex(state);
     }
     return input;
+  }
+
+  public String getNameOfRepository() {
+    System.out.println("Wie soll das gespeierte Addressbuch heißen ?");
+    return readParameter().trim();
+  }
+
+  private String readParameter() {
+    return scanner.nextLine();
   }
 }

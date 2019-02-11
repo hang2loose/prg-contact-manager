@@ -46,27 +46,21 @@ class InputHandler {
     HashMap<String, String> newContactInformations = new HashMap<>();
     System.out.print("Vorname: ");
     newContactInformations.put("surname", readParameter());
-    System.out.println();
 
     System.out.print("Nachname: ");
     newContactInformations.put("name", readParameter());
-    System.out.println();
 
     System.out.print("Telefon: ");
     newContactInformations.put("phoneNumber", readParameter());
-    System.out.println();
 
     System.out.print("eMail: ");
     newContactInformations.put("eMail", readParameter());
-    System.out.println();
 
     System.out.print("Strasse: ");
     newContactInformations.put("street", readParameter());
-    System.out.println();
 
     System.out.print("PLZ: ");
     newContactInformations.put("zip", readParameter());
-    System.out.println();
 
     System.out.print("Stadt: ");
     newContactInformations.put("city", readParameter());
@@ -118,6 +112,7 @@ class InputHandler {
         break;
       case PRINT_CONTACT_DETAILS:
         System.out.println("Welchen Kontakt möchten sie ansehen? ");
+        break;
       default:
     }
     int input;

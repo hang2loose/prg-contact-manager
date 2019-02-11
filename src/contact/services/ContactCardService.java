@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-// TODO implement as Singleton
 public class ContactCardService {
 
   private static ContactCardService contactCardService = null;
@@ -31,12 +30,8 @@ public class ContactCardService {
   private HashMap<Integer, UUID> representationMap = new HashMap<>();
 
   private ContactCardService() {
-    this.contactRepository = new ContactRepositoryImpl();
+    this.contactRepository = ContactRepositoryImpl.getInstance();
     updateRepresentationMap();
-  }
-
-  public HashMap<Integer, UUID> getRepresentationMap() {
-    return representationMap;
   }
 
   private void updateRepresentationMap() {

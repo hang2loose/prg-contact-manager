@@ -1,6 +1,7 @@
 package contact.repository;
 
 import contact.model.ContactCard;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -8,9 +9,23 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class ContactRepositoryImpl implements ContactRepository {
+public class ContactRepositoryImpl implements ContactRepository, Serializable {
+
+  private static ContactRepositoryImpl contactRepositoryImpl = null;
+
+  public static ContactRepositoryImpl getInstance() {
+
+    if (contactRepositoryImpl == null) {
+      contactRepositoryImpl = new ContactRepositoryImpl();
+    }
+    return contactRepositoryImpl;
+  }
+
 
   private HashMap<UUID, ContactCard> contactCardMap = new HashMap<>();
+
+  private ContactRepositoryImpl() {
+  }
 
   @Override
   public ContactCard getContactById(UUID id) {

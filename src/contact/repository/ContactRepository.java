@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ContactRepository extends Serializable {
-
+private static final long serialVersionUID = 1L;
   ContactCard getContactById(UUID id);
 
   List<ContactCard> getAllContacts();

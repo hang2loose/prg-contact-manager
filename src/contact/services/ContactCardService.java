@@ -81,10 +81,11 @@ public class ContactCardService {
 
   private ContactCard fillContact(ContactCardBuilder cardBuilder,
       HashMap<String, String> newContactInformations) {
-    return cardBuilder.withPerson(Person.getPersonBuilder()
-        .withSurname(newContactInformations.get("surname"))
-        .withName(newContactInformations.get("name"))
-        .build())
+    return cardBuilder
+        .withPerson(Person.getPersonBuilder()
+            .withSurname(newContactInformations.get("surname"))
+            .withName(newContactInformations.get("name"))
+            .build())
         .withAddress(Address.getAddressBuilder()
             .withCity(newContactInformations.get("city"))
             .withZipCode(newContactInformations.get("zip"))
@@ -92,7 +93,8 @@ public class ContactCardService {
             .build())
         .withCommunication(Communication.getCommunicationBuilder()
             .withPhone(newContactInformations.get("phoneNumber"))
-            .withMail(newContactInformations.get("eMail")).build())
+            .withMail(newContactInformations.get("eMail"))
+            .build())
         .build();
   }
 
@@ -146,6 +148,7 @@ public class ContactCardService {
         System.out.println(contactCard.getPerson().getName() + "Wurde gesichert");
         outputStream.writeObject(contactCard);
       }
+      outputStream.writeObject(null);
     } catch (IOException exception) {
       return false;
     }
@@ -155,9 +158,10 @@ public class ContactCardService {
   public boolean getContactsFromFile(String name) {
     try (ObjectInputStream inputStream = new ObjectInputStream(
         new FileInputStream(name + ".ser"))) {
-      while (inputStream.available() > 0) {
-        contactRepository.save((ContactCard) inputStream.readObject());
-      }
+      ContactCard tmp;
+      do {
+        tmp = (ContactCard) inputStream.readObject();
+      } while (tmp != null);
     } catch (ClassNotFoundException | IOException exception) {
       return false;
     }

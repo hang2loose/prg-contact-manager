@@ -100,13 +100,12 @@ class InputHandler {
   }
 
   private char getCharacterCommand() {
-    String inputString = scanner.nextLine().toLowerCase();
-    if (inputString.length() == 1) {
-      return inputString.charAt(0);
+    String inputString = scanner.nextLine();
+    while (inputString.length() != 1) {
+      System.out.println("please insert a character as command!!!!\n ");
+      inputString = scanner.nextLine();
     }
-    System.out.println("please insert a character as command!!!!\n ");
-    getCharacterCommand();
-    return 0;
+    return inputString.toLowerCase().charAt(0);
   }
 
   int getContactIndex(StateOfManager state) {

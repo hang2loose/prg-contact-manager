@@ -1,6 +1,8 @@
 package contact.model;
 
-public class Communication {
+import java.io.Serializable;
+
+public class Communication implements Serializable {
 
   String phone = "";
   String mail = "";

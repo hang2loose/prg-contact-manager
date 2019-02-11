@@ -24,6 +24,10 @@ class InputHandler {
         return StateOfManager.PRINT_CONTACT_DETAILS;
       case 'l':
         return StateOfManager.DELETE_CONTACT;
+      case 'r':
+        return StateOfManager.LOAD_REPOSITORY;
+      case 's':
+        return StateOfManager.SAVE_REPOSITORY;
       case 'b':
         return StateOfManager.END;
       default:
@@ -39,6 +43,8 @@ class InputHandler {
     System.out.println("[K] Kontakt bearbeiten");
     System.out.println("[D] Kontaktdetails anzeigen");
     System.out.println("[L] Kontakt loeschen");
+    System.out.println("[S] Speichere Addressbuch");
+    System.out.println("[R] Lade Addressbuch");
     System.out.println("[B] Beenden");
   }
 
@@ -72,12 +78,8 @@ class InputHandler {
     return newContactInformations;
   }
 
-  private String readParameter() {
-    return scanner.nextLine();
-  }
-
   private boolean askForComfirmation() {
-    System.out.println("[S] Aenderung speichern ");
+    System.out.println("[S] Änderung speichern ");
     System.out.println("[A] Abbrechen? ");
 
     char input = getCharacterCommand();
@@ -88,7 +90,7 @@ class InputHandler {
       case 's':
         return true;
       default:
-        System.out.println(input + " Character not an Command!");
+        System.out.println(input + " Character not a Command!");
         return askForComfirmation();
     }
   }
@@ -96,7 +98,7 @@ class InputHandler {
   private char getCharacterCommand() {
     String inputString = scanner.nextLine();
     while (inputString.length() != 1) {
-      System.out.println("please insert a character as command!!!!\n ");
+      System.out.println("Please insert a character as command!\n ");
       inputString = scanner.nextLine();
     }
     return inputString.toLowerCase().charAt(0);
@@ -123,5 +125,14 @@ class InputHandler {
       return getContactIndex(state);
     }
     return input;
+  }
+
+  public String getNameOfRepository() {
+    System.out.println("Bitte gib den Namen für dein Addressbuch ein:");
+    return readParameter().trim();
+  }
+
+  private String readParameter() {
+    return scanner.nextLine();
   }
 }

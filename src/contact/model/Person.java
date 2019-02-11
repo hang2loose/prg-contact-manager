@@ -1,6 +1,8 @@
 package contact.model;
 
-enum Gender {
+import java.io.Serializable;
+
+enum Gender implements Serializable {
   NONE("n"), DIVERSE("d"), FEMALE("f"), MALE("m");
 
   private String representation;
@@ -20,7 +22,7 @@ enum Gender {
 
 }
 
-public class Person {
+public class Person implements Serializable {
   String surname = "";
   String name = "";
 

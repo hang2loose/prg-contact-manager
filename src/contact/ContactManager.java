@@ -4,7 +4,7 @@ import contact.services.ContactCardService;
 
 enum StateOfManager {
   GET_COMMAND, END, INIT, CREATE_NEW_CONTACT, DELETE_CONTACT, EDIT_CONTACT,
-  PRINT_CONTACT_DETAILS, GET_ALL_CONTACTS
+  PRINT_CONTACT_DETAILS, SAVE_REPOSITORY, LOAD_REPOSITORY, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
@@ -50,6 +50,12 @@ public class ContactManager {
         case PRINT_CONTACT_DETAILS:
           stateOfManager = executePrintDetails();
           break;
+        case SAVE_REPOSITORY:
+          stateOfManager = executeSaveRepo();
+          break;
+        case LOAD_REPOSITORY:
+          stateOfManager = executeLoadRepo();
+          break;
         case END:
           System.out.println("Auf Wiedersehen!");
           return;
@@ -57,6 +63,20 @@ public class ContactManager {
           throw new IllegalStateException("Something went terrible Wrong Sorry for that");
       }
     }
+  }
+
+  private StateOfManager executeLoadRepo() {
+    if (!contactCardService.readRepo(inputHandler.getNameOfRepository())) {
+      System.out.println("Error while loading Repository!");
+    }
+    return StateOfManager.GET_COMMAND;
+  }
+
+  private StateOfManager executeSaveRepo() {
+    if (!contactCardService.wirteRepo(inputHandler.getNameOfRepository())) {
+      System.out.println("Error Repo not Saved!!!!!");
+    }
+    return StateOfManager.GET_COMMAND;
   }
 
   private StateOfManager executePrintDetails() {

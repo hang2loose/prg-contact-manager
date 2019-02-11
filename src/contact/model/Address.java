@@ -1,6 +1,8 @@
 package contact.model;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
 
   String country = "";
   String city = "";

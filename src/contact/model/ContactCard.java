@@ -1,8 +1,9 @@
 package contact.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class ContactCard {
+public class ContactCard implements Serializable {
 
   private UUID id;
 

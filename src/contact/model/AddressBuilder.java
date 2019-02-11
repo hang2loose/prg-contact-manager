@@ -1,6 +1,8 @@
 package contact.model;
 
-public class AddressBuilder {
+import java.io.Serializable;
+
+public class AddressBuilder implements Serializable {
 
   private Address addressUnderConstruction;
 

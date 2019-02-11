@@ -121,6 +121,8 @@ public class ContactCardService {
         .collect(Collectors.toList());
   }
 
+
+  // TODO should be implemented in Reposository
   public boolean wirteRepo(String nameOfRepository) {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(
         new FileOutputStream(nameOfRepository + ".ser"))) {
@@ -131,6 +133,7 @@ public class ContactCardService {
     return true;
   }
 
+  // TODO should be implemented in Reposository
   public boolean readRepo(String nameOfRepository) {
     try (ObjectInputStream inputStream = new ObjectInputStream(
         new FileInputStream(nameOfRepository + ".ser"))) {
@@ -140,6 +143,10 @@ public class ContactCardService {
     }
     return true;
   }
+
+  /*
+
+  Test Code for saving single contactCards
 
   public boolean saveContactCards(String name) {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(
@@ -168,4 +175,5 @@ public class ContactCardService {
     }
     return true;
   }
+  */
 }

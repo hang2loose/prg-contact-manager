@@ -72,8 +72,5 @@ class DummyDataCreator {
             .build())
         .build();
     repository.save(contact3);
-
-
   }
-
 }

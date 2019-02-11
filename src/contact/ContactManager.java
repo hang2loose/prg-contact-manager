@@ -51,7 +51,7 @@ public class ContactManager {
           stateOfManager = executePrintDetails();
           break;
         case SAVE_REPOSITORY:
-          contactCardService.wirteRepo(inputHandler.getNameOfRepository());
+          stateOfManager = executeSaveRepo();
           break;
         case NOT_IMPLEMENTET:
           System.out.println("This function is not implementet yet!!!!");
@@ -64,6 +64,13 @@ public class ContactManager {
           throw new IllegalStateException("Something went terrible Wrong Sorry for that");
       }
     }
+  }
+
+  private StateOfManager executeSaveRepo() {
+    if (!contactCardService.wirteRepo(inputHandler.getNameOfRepository())) {
+      System.out.println("Error Repo not Saved!!!!!");
+    }
+    return StateOfManager.GET_COMMAND;
   }
 
   private StateOfManager executePrintDetails() {

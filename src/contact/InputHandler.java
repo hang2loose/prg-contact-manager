@@ -118,6 +118,7 @@ class InputHandler {
         break;
       case PRINT_CONTACT_DETAILS:
         System.out.println("Welchen Kontakt möchten sie ansehen? ");
+        break;
       default:
     }
     int input;

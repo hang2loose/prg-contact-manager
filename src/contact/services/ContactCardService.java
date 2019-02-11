@@ -138,4 +138,29 @@ public class ContactCardService {
     }
     return true;
   }
+
+  public boolean saveContactCards(String name) {
+    try (ObjectOutputStream outputStream = new ObjectOutputStream(
+        new FileOutputStream(name + ".ser"))) {
+      for (ContactCard contactCard : contactRepository.getAllContacts()) {
+        System.out.println(contactCard.getPerson().getName() + "Wurde gesichert");
+        outputStream.writeObject(contactCard);
+      }
+    } catch (IOException exception) {
+      return false;
+    }
+    return true;
+  }
+
+  public boolean getContactsFromFile(String name) {
+    try (ObjectInputStream inputStream = new ObjectInputStream(
+        new FileInputStream(name + ".ser"))) {
+      while (inputStream.available() > 0) {
+        contactRepository.save((ContactCard) inputStream.readObject());
+      }
+    } catch (ClassNotFoundException | IOException exception) {
+      return false;
+    }
+    return true;
+  }
 }

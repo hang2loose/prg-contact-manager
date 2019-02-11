@@ -24,6 +24,10 @@ class InputHandler {
         return StateOfManager.PRINT_CONTACT_DETAILS;
       case 'l':
         return StateOfManager.DELETE_CONTACT;
+      case 'r':
+        return StateOfManager.NOT_IMPLEMENTET;
+      case 's':
+        return StateOfManager.NOT_IMPLEMENTET;
       case 'b':
         return StateOfManager.END;
       default:
@@ -39,6 +43,8 @@ class InputHandler {
     System.out.println("[K] Kontakt bearbeiten");
     System.out.println("[D] Kontaktdetails anzeigen");
     System.out.println("[L] Kontakt loeschen");
+    System.out.println("[S] Speichere Repo");
+    System.out.println("[R] Lade Repo");
     System.out.println("[B] Beenden");
   }
 

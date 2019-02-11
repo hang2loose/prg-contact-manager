@@ -24,7 +24,7 @@ class DummyDataCreator {
         .withAddress(
             Address
                 .getAddressBuilder()
-                .withCity("city")
+                .withCity("Freiburg")
                 .withCountry("Germany")
                 .build())
         .withCommunication(Communication
@@ -42,7 +42,8 @@ class DummyDataCreator {
             .build())
         .withCommunication(Communication.getCommunicationBuilder()
             .withMail("diri_elsi@gmx.de)")
-            .withPhone("07665 112233").build())
+            .withPhone("07665 112233")
+            .build())
         .withAddress(Address.getAddressBuilder()
             .withCity("HomeTown")
             .withZipCode("79227")
@@ -52,7 +53,24 @@ class DummyDataCreator {
         .build();
     repository.save(contact2);
 
-
+    ContactCard contact3 = ContactCard.getContactCardBuilder()
+        .withPerson(Person.getPersonBuilder()
+            .withName("Jethro")
+            .withSurname("Hero")
+            .withBirthdate("01.01.1970")
+            .withGender("D")
+            .build())
+        .withCommunication(Communication.getCommunicationBuilder()
+            .withMail("awesomeDude@heroes.org")
+            .withPhone("001-900-BE-A-HERO")
+            .build())
+        .withAddress(Address.getAddressBuilder()
+            .withCity("Gotham City")
+            .withZipCode("000001")
+            .withStreet("Worlds End")
+            .withStreetNumber("101")
+            .build())
+        .build();
+    repository.save(contact3);
   }
-
 }

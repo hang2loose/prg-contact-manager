@@ -3,7 +3,8 @@ package contact;
 import contact.services.ContactCardService;
 
 enum StateOfManager {
-  GET_INPUT, GET_COMMAND, END, INIT, NOT_IMPLEMENTET_YET, GET_ALL_CONTACTS
+  GET_COMMAND, END, INIT, CREATE_NEW_CONTACT, DELETE_CONTACT, EDIT_CONTACT,
+  PRINT_CONTACT_DETAILS, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
@@ -15,10 +16,9 @@ public class ContactManager {
 
   private ContactManager() {
     inputHandler = new InputHandler();
-    contactCardService = new ContactCardService();
+    contactCardService = ContactCardService.getInstance();
     contactCardService.initRepoWithDummyData();
   }
-
 
   private StateOfManager stateOfManager = StateOfManager.INIT;
 
@@ -30,24 +30,66 @@ public class ContactManager {
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case GET_COMMAND:
-          stateOfManager = inputHandler.getInput(stateOfManager);
+          stateOfManager = inputHandler.getInput();
           break;
         case GET_ALL_CONTACTS:
           clear();
-          TableManager.firstTableRow();
-          System.out.println(contactCardService.getAllLastNames());
+          TableManager.printContactsList(contactCardService.getAllCards());
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
-        case NOT_IMPLEMENTET_YET:
-          clear();
-          System.out.println("This method is not implementet yet!!!!!!!!!!!!!!!!");
-          stateOfManager = StateOfManager.GET_COMMAND;
+        case CREATE_NEW_CONTACT:
+          contactCardService.createNewContact(inputHandler.getNewContactInformations());
+          stateOfManager = StateOfManager.GET_ALL_CONTACTS;
+          break;
+        case DELETE_CONTACT:
+          stateOfManager = executeDeleteContact();
+          break;
+        case EDIT_CONTACT:
+          stateOfManager = executeEditContact();
+          break;
+        case PRINT_CONTACT_DETAILS:
+          stateOfManager = executePrintDetails();
           break;
         case END:
-        default:
+          System.out.println("Auf Wiedersehen!");
           return;
+        default:
+          throw new IllegalStateException("Something went terrible Wrong Sorry for that");
       }
     }
+  }
+
+  private StateOfManager executePrintDetails() {
+    int index = inputHandler.getContactIndex(StateOfManager.PRINT_CONTACT_DETAILS);
+
+    if (contactCardService.repoContainsIndex(index)) {
+      TableManager.printContactCard(contactCardService.getContactCardFromIndex(index));
+      return StateOfManager.GET_COMMAND;
+    }
+    System.out.println("Kontakt nicht gefunden!");
+    return StateOfManager.GET_COMMAND;
+  }
+
+  private StateOfManager executeDeleteContact() {
+    int indexId = inputHandler.getContactIndex(StateOfManager.DELETE_CONTACT);
+
+    if (contactCardService.repoContainsIndex(indexId)) {
+      contactCardService.deleteContactByIndex(indexId);
+      return StateOfManager.GET_ALL_CONTACTS;
+    }
+    System.out.println("Kontakt nicht gefunden!");
+    return StateOfManager.GET_COMMAND;
+  }
+
+  private StateOfManager executeEditContact() {
+    int indexId = inputHandler.getContactIndex(StateOfManager.EDIT_CONTACT);
+
+    if (contactCardService.repoContainsIndex(indexId)) {
+      contactCardService.editContactById(indexId, inputHandler.getNewContactInformations());
+      return StateOfManager.GET_ALL_CONTACTS;
+    }
+    System.out.println("Index not found!!!!");
+    return StateOfManager.GET_COMMAND;
   }
 
   private void start() {

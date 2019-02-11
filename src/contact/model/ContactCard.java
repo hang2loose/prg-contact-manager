@@ -30,6 +30,14 @@ public class ContactCard {
     return person;
   }
 
+  public String getPersonName() {
+    return person.name;
+  }
+
+  public ContactCardBuilder getEditContactCard() {
+    return new ContactCardBuilder(this);
+  }
+
   public static ContactCardBuilder getContactCardBuilder() {
     return new ContactCardBuilder();
   }

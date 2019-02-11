@@ -25,7 +25,7 @@ public class Person {
   String name = "";
 
   String title = "";
-  String birthday = "";                 // TODO to LocalDate;
+  String birthday = "";
 
   Gender gender = Gender.NONE;
 

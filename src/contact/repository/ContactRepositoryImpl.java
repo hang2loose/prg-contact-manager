@@ -1,6 +1,7 @@
 package contact.repository;
 
 import contact.model.ContactCard;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,7 @@ public class ContactRepositoryImpl implements ContactRepository {
   private HashMap<UUID, ContactCard> contactCardMap = new HashMap<>();
 
   @Override
-  public ContactCard getContactByID(UUID id) {
+  public ContactCard getContactById(UUID id) {
     return contactCardMap.getOrDefault(id, null);
   }
 
@@ -28,18 +29,13 @@ public class ContactRepositoryImpl implements ContactRepository {
   }
 
   @Override
-  public Collection<ContactCard> getAllContacts() {
-    return contactCardMap.values();
+  public List<ContactCard> getAllContacts() {
+    return new ArrayList<>(contactCardMap.values());
   }
 
   @Override
   public void deleteContactCard(UUID id) {
     contactCardMap.remove(id);
-  }
-
-  @Override
-  public void editContactCard(UUID id, ContactCard contactCard) {
-    contactCardMap.put(id, contactCard);
   }
 
   @Override
@@ -54,5 +50,10 @@ public class ContactRepositoryImpl implements ContactRepository {
     return contactCardMap.values().stream()
         .filter(contactCard -> surName.equalsIgnoreCase(contactCard.getPerson().getSurname()))
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public int getSizeOfRepo() {
+    return contactCardMap.size();
   }
 }

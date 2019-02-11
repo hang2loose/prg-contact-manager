@@ -127,7 +127,7 @@ class InputHandler {
     return input;
   }
 
-  public String getNameOfRepository() {
+  String getNameOfRepository() {
     System.out.println("Bitte gib den Namen für dein Addressbuch ein:");
     return readParameter().trim();
   }

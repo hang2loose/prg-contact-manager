@@ -74,14 +74,14 @@ public class ContactManager {
   }
 
   private StateOfManager executeLoadRepo() {
-    if (!contactCardService.readRepo(inputHandler.getNameOfRepository())) {
+    if (!contactCardService.readData(inputHandler.getNameOfRepository())) {
       System.out.println("Error while loading Repository!");
     }
     return StateOfManager.GET_COMMAND;
   }
 
   private StateOfManager executeSaveRepo() {
-    if (!contactCardService.wirteRepo(inputHandler.getNameOfRepository())) {
+    if (!contactCardService.wirteData(inputHandler.getNameOfRepository())) {
       System.out.println("Error Repo not Saved!!!!!");
     }
     return StateOfManager.GET_COMMAND;

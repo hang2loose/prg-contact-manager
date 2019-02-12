@@ -7,11 +7,6 @@ import contact.model.ContactCardBuilder;
 import contact.model.Person;
 import contact.repository.ContactRepository;
 import contact.repository.ContactRepositoryImpl;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -121,28 +116,16 @@ public class ContactCardService {
         .collect(Collectors.toList());
   }
 
-
-  // TODO should be implemented in Reposository
-  public boolean wirteRepo(String nameOfRepository) {
-    try (ObjectOutputStream outputStream = new ObjectOutputStream(
-        new FileOutputStream(nameOfRepository + ".ser"))) {
-      outputStream.writeObject(contactRepository);
-    } catch (IOException exception) {
-      return false;
-    }
-    return true;
+  public boolean wirteData(String nameOfRepository) {
+    return contactRepository.wirteRepo(nameOfRepository);
   }
 
-  // TODO should be implemented in Reposository
-  public boolean readRepo(String nameOfRepository) {
-    try (ObjectInputStream inputStream = new ObjectInputStream(
-        new FileInputStream(nameOfRepository + ".ser"))) {
-      contactRepository = (ContactRepository) inputStream.readObject();
-    } catch (ClassNotFoundException | IOException exception) {
-      return false;
-    }
-    return true;
+  public boolean readData(String nameOfRepository) {
+    return contactRepository.readRepo(nameOfRepository);
   }
+
+
+
 
   /*
 

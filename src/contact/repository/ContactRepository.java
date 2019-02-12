@@ -24,4 +24,7 @@ public interface ContactRepository extends Serializable {
 
   int getSizeOfRepo();
 
+  boolean wirteRepo(String nameOfRepository);
+
+  boolean readRepo(String nameOfRepository);
 }

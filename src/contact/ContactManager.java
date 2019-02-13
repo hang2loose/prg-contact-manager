@@ -42,6 +42,7 @@ public class ContactManager {
           break;
         case GET_ALL_CONTACTS:
           clear();
+          executeSaveRepo();
           TableManager.printContactsList(contactCardService.getAllCards());
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
@@ -61,6 +62,7 @@ public class ContactManager {
         case NOT_IMPLEMENTET:
           System.out.println("Not Implementet yet");
           stateOfManager = StateOfManager.GET_COMMAND;
+          break;
         case END:
           System.out.println("Auf Wiedersehen!");
           executeSaveRepo();
@@ -74,6 +76,7 @@ public class ContactManager {
   private StateOfManager executeLoadRepo() {
     if (!contactCardService.readData("contacts")) {
       ContactCardService.getInstance().initRepoWithDummyData();
+      executeSaveRepo();
       System.out.println("Repository initialized with Dummy data");
     }
     return StateOfManager.GET_COMMAND;
@@ -81,7 +84,7 @@ public class ContactManager {
 
   private StateOfManager executeSaveRepo() {
     if (!contactCardService.wirteData("contacts")) {
-      System.out.println("Error Repo not Saved!!!!!");
+      System.out.println("Error: Repository was not saved");
     }
     return StateOfManager.GET_COMMAND;
   }

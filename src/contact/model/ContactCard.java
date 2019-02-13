@@ -48,4 +48,9 @@ public class ContactCard implements Serializable {
   public static ContactCardBuilder getContactCardBuilder() {
     return new ContactCardBuilder();
   }
+
+  @Override
+  public String toString() {
+    return person.toString() + communication.toString() + address.toString();
+  }
 }

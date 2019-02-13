@@ -27,4 +27,8 @@ public class Address implements Serializable {
     return new AddressBuilder();
   }
 
+  @Override
+  public String toString() {
+    return city + " " + zipCode + " " + street + " ";
+  }
 }

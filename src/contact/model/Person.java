@@ -20,4 +20,9 @@ public class Person implements Serializable {
   public static PersonBuilder getPersonBuilder() {
     return new PersonBuilder();
   }
+
+  @Override
+  public String toString() {
+    return surname + " " + name + " ";
+  }
 }

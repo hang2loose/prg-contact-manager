@@ -22,4 +22,8 @@ public class Communication implements Serializable {
     return new CommunicationBuilder();
   }
 
+  @Override
+  public String toString() {
+    return phone + " " + mail + " ";
+  }
 }

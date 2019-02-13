@@ -4,12 +4,8 @@ public class CommunicationBuilder {
 
   private Communication communicationUnderConstruction;
 
-  public CommunicationBuilder() {
+  CommunicationBuilder() {
     this.communicationUnderConstruction = new Communication();
-  }
-
-  public CommunicationBuilder(Communication communicationUnderConstruction) {
-    this.communicationUnderConstruction = communicationUnderConstruction;
   }
 
   public CommunicationBuilder withPhone(String phone) {

@@ -10,6 +10,7 @@ import contact.model.Person;
 import contact.repository.ContactRepository;
 import contact.repository.ContactRepositoryImpl;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -117,7 +118,7 @@ public class ContactCardService {
         .collect(Collectors.toList());
   }
 
-  public boolean wirteData(String nameOfRepository) {
+  public boolean writeData(String nameOfRepository) {
     return contactRepository.wirteRepo(nameOfRepository);
   }
 
@@ -125,35 +126,32 @@ public class ContactCardService {
     return contactRepository.readRepo(nameOfRepository);
   }
 
-  public List<ContactCard> orderContacts(SortableColums colum, SortingOrder order) {
-    switch (colum) {
+  public List<ContactCard> orderContacts(SortableColums column, SortingOrder order) {
+
+    List<ContactCard> sortedList = getSortedContactList(column);
+
+    if (order.equals(SortingOrder.DECSENDING)) {
+      Collections.reverse(sortedList);
+      return sortedList;
+    }
+
+    return sortedList;
+  }
+
+  private List<ContactCard> getSortedContactList(SortableColums colums) {
+    switch (colums) {
       case SURNAME:
-        if (order.equals(SortingOrder.DECSENDING)) {
-          return contactRepository.getAllContacts().stream()
-              .sorted(
-                  Comparator.comparing(ContactCard::getPersonSurname, String::compareToIgnoreCase)
-                      .reversed())
-              .collect(Collectors.toList());
-        }
         return contactRepository.getAllContacts().stream()
             .sorted(
                 Comparator.comparing(ContactCard::getPersonSurname, String::compareToIgnoreCase))
             .collect(Collectors.toList());
       case NAME:
-        if (order.equals(SortingOrder.DECSENDING)) {
-          return contactRepository.getAllContacts().stream()
-              .sorted(
-                  Comparator.comparing(ContactCard::getPersonName, String::compareToIgnoreCase)
-                      .reversed())
-              .collect(Collectors.toList());
-        }
         return contactRepository.getAllContacts().stream()
             .sorted(
                 Comparator.comparing(ContactCard::getPersonName, String::compareToIgnoreCase))
             .collect(Collectors.toList());
       default:
-        System.out.println("Error");
-        return null;
+        return contactRepository.getAllContacts();
     }
   }
 

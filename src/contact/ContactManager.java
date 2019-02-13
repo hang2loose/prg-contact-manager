@@ -1,14 +1,17 @@
 package contact;
 
+import static contact.enums.ManagerState.DELETE_CONTACT;
+import static contact.enums.ManagerState.EDIT_CONTACT;
+import static contact.enums.ManagerState.GET_ALL_CONTACTS;
+import static contact.enums.ManagerState.GET_COMMAND;
+import static contact.enums.ManagerState.INIT;
+import static contact.enums.ManagerState.PRINT_CONTACT_DETAILS;
+
+import contact.enums.ManagerState;
 import contact.enums.SortableColums;
 import contact.enums.SortingOrder;
 import contact.services.ContactCardService;
 
-enum StateOfManager {
-  GET_COMMAND, END, INIT, CREATE_NEW_CONTACT, DELETE_CONTACT, EDIT_CONTACT,
-  PRINT_CONTACT_DETAILS, SAVE_REPOSITORY, LOAD_REPOSITORY, NOT_IMPLEMENTET, GET_CONTACT_IN_ORDER,
-  GET_CONTACT_BY_SEARCH_PARAM, GET_ALL_CONTACTS
-}
 
 public class ContactManager {
 
@@ -30,50 +33,44 @@ public class ContactManager {
     contactCardService = ContactCardService.getInstance();
   }
 
-  private StateOfManager stateOfManager = StateOfManager.INIT;
+  private ManagerState managerState = INIT;
 
   public void runContactManager() {
     while (true) {
-      switch (stateOfManager) {
+      switch (managerState) {
         case INIT:
-          start();
+          startMessage();
           executeLoadRepo();
-          stateOfManager = StateOfManager.GET_COMMAND;
+          managerState = GET_COMMAND;
           break;
         case GET_COMMAND:
-          stateOfManager = inputHandler.getInput();
+          managerState = inputHandler.getInput();
           break;
         case GET_ALL_CONTACTS:
-          clear();
           executeSaveRepo();
-          System.out.println("Ihre Kontakte: \n");
-          TableManager.printContactsList(contactCardService.getAllCards());
-          stateOfManager = StateOfManager.GET_COMMAND;
+          clearAndPrintTable();
+          managerState = GET_COMMAND;
           break;
         case CREATE_NEW_CONTACT:
-          contactCardService.createNewContact(inputHandler.getNewContactInformations());
-          stateOfManager = StateOfManager.GET_ALL_CONTACTS;
+          contactCardService.createNewContact(inputHandler.getNewContactInformation());
+          managerState = GET_ALL_CONTACTS;
           break;
         case DELETE_CONTACT:
-          stateOfManager = executeDeleteContact();
+          managerState = executeDeleteContact();
           break;
         case EDIT_CONTACT:
-          stateOfManager = executeEditContact();
+          managerState = executeEditContact();
           break;
         case PRINT_CONTACT_DETAILS:
-          stateOfManager = executePrintDetails();
+          managerState = executePrintDetails();
           break;
         case GET_CONTACT_IN_ORDER:
-          SortableColums colum = inputHandler.getColum();
-          SortingOrder order = inputHandler.getOrder(colum);
-          System.out.println("Ihre sortierten Kontakte: \n");
-          TableManager.printContactsList(contactCardService.orderContacts(colum, order));
-          stateOfManager = StateOfManager.GET_COMMAND;
+          managerState = executeContactInOrder();
           break;
         case GET_CONTACT_BY_SEARCH_PARAM:
           TableManager.printContactsList(
               contactCardService.getSearchResult(inputHandler.readSearchParameter()));
-          stateOfManager = StateOfManager.GET_COMMAND;
+          managerState = GET_COMMAND;
           break;
         case END:
           System.out.println("Auf Wiedersehen!");
@@ -85,60 +82,76 @@ public class ContactManager {
     }
   }
 
-  private StateOfManager executeLoadRepo() {
+  private ManagerState executeContactInOrder() {
+    SortableColums colum = inputHandler.getColumn();
+    SortingOrder order = inputHandler.getOrder(colum);
+    System.out.println("Ihre sortierten Kontakte: \n");
+    TableManager.printContactsList(contactCardService.orderContacts(colum, order));
+    return GET_COMMAND;
+  }
+
+  private ManagerState executeLoadRepo() {
     if (!contactCardService.readData("contacts")) {
       ContactCardService.getInstance().initRepoWithDummyData();
       executeSaveRepo();
-      System.out.println("Repository initialized with Dummy data");
+      System.out.println("Repository initialized with Dummy Data");
     }
-    return StateOfManager.GET_COMMAND;
+    return GET_COMMAND;
   }
 
-  private StateOfManager executeSaveRepo() {
-    if (!contactCardService.wirteData("contacts")) {
+  private ManagerState executeSaveRepo() {
+    if (!contactCardService.writeData("contacts")) {
       System.out.println("Error: Repository was not saved");
     }
-    return StateOfManager.GET_COMMAND;
+    return GET_COMMAND;
   }
 
-  private StateOfManager executePrintDetails() {
-    int index = inputHandler.getContactIndex(StateOfManager.PRINT_CONTACT_DETAILS);
+  private ManagerState executePrintDetails() {
+    clearAndPrintTable();
+    int index = inputHandler.getContactIndex(PRINT_CONTACT_DETAILS);
 
     if (contactCardService.repoContainsIndex(index)) {
       TableManager.printContactCard(contactCardService.getContactCardFromIndex(index));
-      return StateOfManager.GET_COMMAND;
+      return GET_COMMAND;
     }
     System.out.println("Kontakt nicht gefunden!");
-    return StateOfManager.GET_COMMAND;
+    return GET_COMMAND;
   }
 
-  private StateOfManager executeDeleteContact() {
-    int indexId = inputHandler.getContactIndex(StateOfManager.DELETE_CONTACT);
+  private ManagerState executeDeleteContact() {
+    clearAndPrintTable();
+    int indexId = inputHandler.getContactIndex(DELETE_CONTACT);
 
     if (contactCardService.repoContainsIndex(indexId)) {
       contactCardService.deleteContactByIndex(indexId);
-      return StateOfManager.GET_ALL_CONTACTS;
+      return GET_ALL_CONTACTS;
     }
     System.out.println("Kontakt nicht gefunden!");
-    return StateOfManager.GET_COMMAND;
+    return GET_COMMAND;
   }
 
-  private StateOfManager executeEditContact() {
-    int indexId = inputHandler.getContactIndex(StateOfManager.EDIT_CONTACT);
+  private ManagerState executeEditContact() {
+    clearAndPrintTable();
+    int indexId = inputHandler.getContactIndex(EDIT_CONTACT);
 
     if (contactCardService.repoContainsIndex(indexId)) {
-      contactCardService.editContactById(indexId, inputHandler.getNewContactInformations());
-      return StateOfManager.GET_ALL_CONTACTS;
+      contactCardService.editContactById(indexId, inputHandler.getNewContactInformation());
+      return GET_ALL_CONTACTS;
     }
-    System.out.println("Index not found!!!!");
-    return StateOfManager.GET_COMMAND;
+    System.out.println("404: Index not found");
+    return GET_COMMAND;
   }
 
-  private void start() {
+  private void startMessage() {
     System.out.println("########################################################################");
     System.out.println("#                         Contact Manager v1.0                         #");
     System.out.println("########################################################################");
     System.out.println();
+  }
+
+  private void clearAndPrintTable() {
+    clear();
+    TableManager.printContactsList(contactCardService.getAllCards());
   }
 
   private static void clear() {

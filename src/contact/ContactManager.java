@@ -7,7 +7,7 @@ import contact.services.ContactCardService;
 enum StateOfManager {
   GET_COMMAND, END, INIT, CREATE_NEW_CONTACT, DELETE_CONTACT, EDIT_CONTACT,
   PRINT_CONTACT_DETAILS, SAVE_REPOSITORY, LOAD_REPOSITORY, NOT_IMPLEMENTET, GET_CONTACT_IN_ORDER,
-  GET_ALL_CONTACTS
+  GET_CONTACT_BY_SEARCH_PARAM, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
@@ -68,8 +68,9 @@ public class ContactManager {
           TableManager.printContactsList(contactCardService.orderContacts(colum, order));
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
-        case NOT_IMPLEMENTET:
-          System.out.println("Not Implementet yet");
+        case GET_CONTACT_BY_SEARCH_PARAM:
+          TableManager.printContactsList(
+              contactCardService.getContactsBySearchParam(inputHandler.readSearchParameter()));
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case END:

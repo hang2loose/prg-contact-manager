@@ -29,7 +29,7 @@ class InputHandler {
       case 'o':
         return StateOfManager.GET_CONTACT_IN_ORDER;
       case 's':
-        return StateOfManager.NOT_IMPLEMENTET;
+        return StateOfManager.GET_CONTACT_BY_SEARCH_PARAM;
       case 'b':
         return StateOfManager.END;
       default:
@@ -170,5 +170,10 @@ class InputHandler {
       default:
         return getOrder(columName);
     }
+  }
+
+  public String readSearchParameter() {
+    System.out.print("Geben Sie einen Suchbegriff ein: ");
+    return readParameter();
   }
 }

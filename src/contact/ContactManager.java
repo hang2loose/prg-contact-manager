@@ -39,7 +39,7 @@ public class ContactManager {
     while (true) {
       switch (managerState) {
         case INIT:
-          start();
+          startMessage();
           executeLoadRepo();
           managerState = GET_COMMAND;
           break;
@@ -47,9 +47,8 @@ public class ContactManager {
           managerState = inputHandler.getInput();
           break;
         case GET_ALL_CONTACTS:
-          clear();
           executeSaveRepo();
-          TableManager.printContactsList(contactCardService.getAllCards());
+          clearAndPrintTable();
           managerState = GET_COMMAND;
           break;
         case CREATE_NEW_CONTACT:
@@ -108,6 +107,7 @@ public class ContactManager {
   }
 
   private ManagerState executePrintDetails() {
+    clearAndPrintTable();
     int index = inputHandler.getContactIndex(PRINT_CONTACT_DETAILS);
 
     if (contactCardService.repoContainsIndex(index)) {
@@ -119,6 +119,7 @@ public class ContactManager {
   }
 
   private ManagerState executeDeleteContact() {
+    clearAndPrintTable();
     int indexId = inputHandler.getContactIndex(DELETE_CONTACT);
 
     if (contactCardService.repoContainsIndex(indexId)) {
@@ -130,6 +131,7 @@ public class ContactManager {
   }
 
   private ManagerState executeEditContact() {
+    clearAndPrintTable();
     int indexId = inputHandler.getContactIndex(EDIT_CONTACT);
 
     if (contactCardService.repoContainsIndex(indexId)) {
@@ -140,11 +142,16 @@ public class ContactManager {
     return GET_COMMAND;
   }
 
-  private void start() {
+  private void startMessage() {
     System.out.println("########################################################################");
     System.out.println("#                         Contact Manager v1.0                         #");
     System.out.println("########################################################################");
     System.out.println();
+  }
+
+  private void clearAndPrintTable() {
+    clear();
+    TableManager.printContactsList(contactCardService.getAllCards());
   }
 
   private static void clear() {

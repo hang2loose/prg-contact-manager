@@ -19,13 +19,11 @@ class DummyDataCreator {
                 .getPersonBuilder()
                 .withName("Burggraf")
                 .withSurname("Marco")
-                .withBirthdate("10.10.10")
                 .build())
         .withAddress(
             Address
                 .getAddressBuilder()
                 .withCity("Freiburg")
-                .withCountry("Germany")
                 .build())
         .withCommunication(Communication
             .getCommunicationBuilder()
@@ -48,7 +46,6 @@ class DummyDataCreator {
             .withCity("HomeTown")
             .withZipCode("79227")
             .withStreet("Laternenstrasse 1")
-            .withStreetNumber("1")
             .build())
         .build();
     repository.save(contact2);
@@ -57,8 +54,6 @@ class DummyDataCreator {
         .withPerson(Person.getPersonBuilder()
             .withName("Jethro")
             .withSurname("Hero")
-            .withBirthdate("01.01.1970")
-            .withGender("D")
             .build())
         .withCommunication(Communication.getCommunicationBuilder()
             .withMail("awesomeDude@heroes.org")
@@ -68,7 +63,6 @@ class DummyDataCreator {
             .withCity("Gotham City")
             .withZipCode("000001")
             .withStreet("Worlds End")
-            .withStreetNumber("101")
             .build())
         .build();
     repository.save(contact3);

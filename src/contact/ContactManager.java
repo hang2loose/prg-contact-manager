@@ -25,7 +25,6 @@ public class ContactManager {
   private ContactManager() {
     inputHandler = new InputHandler();
     contactCardService = ContactCardService.getInstance();
-    contactCardService.initRepoWithDummyData();
   }
 
   private StateOfManager stateOfManager = StateOfManager.INIT;
@@ -35,6 +34,7 @@ public class ContactManager {
       switch (stateOfManager) {
         case INIT:
           start();
+          executeLoadRepo();
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case GET_COMMAND:
@@ -63,6 +63,7 @@ public class ContactManager {
           stateOfManager = StateOfManager.GET_COMMAND;
         case END:
           System.out.println("Auf Wiedersehen!");
+          executeSaveRepo();
           return;
         default:
           throw new IllegalStateException("Something went terribly wrong SORRY");
@@ -71,14 +72,15 @@ public class ContactManager {
   }
 
   private StateOfManager executeLoadRepo() {
-    if (!contactCardService.readData(inputHandler.getNameOfRepository())) {
-      System.out.println("Error while loading Repository!");
+    if (!contactCardService.readData("contacts")) {
+      ContactCardService.getInstance().initRepoWithDummyData();
+      System.out.println("Repository initialized with Dummy data");
     }
     return StateOfManager.GET_COMMAND;
   }
 
   private StateOfManager executeSaveRepo() {
-    if (!contactCardService.wirteData(inputHandler.getNameOfRepository())) {
+    if (!contactCardService.wirteData("contacts")) {
       System.out.println("Error Repo not Saved!!!!!");
     }
     return StateOfManager.GET_COMMAND;

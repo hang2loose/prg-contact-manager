@@ -123,40 +123,4 @@ public class ContactCardService {
   public boolean readData(String nameOfRepository) {
     return contactRepository.readRepo(nameOfRepository);
   }
-
-
-
-
-  /*
-
-  Test Code for saving single contactCards
-
-  public boolean saveContactCards(String name) {
-    try (ObjectOutputStream outputStream = new ObjectOutputStream(
-        new FileOutputStream(name + ".ser"))) {
-      for (ContactCard contactCard : contactRepository.getAllContacts()) {
-        System.out.println(contactCard.getPerson().getName() + "Wurde gesichert");
-        outputStream.writeObject(contactCard);
-      }
-      outputStream.writeObject(null);
-    } catch (IOException exception) {
-      return false;
-    }
-    return true;
-  }
-
-  public boolean getContactsFromFile(String name) {
-    try (ObjectInputStream inputStream = new ObjectInputStream(
-        new FileInputStream(name + ".ser"))) {
-      ContactCard tmp = (ContactCard) inputStream.readObject();
-      do {
-        contactRepository.save(tmp);
-        tmp = (ContactCard) inputStream.readObject();
-      } while (tmp != null);
-    } catch (ClassNotFoundException | IOException exception) {
-      return false;
-    }
-    return true;
-  }
-  */
 }

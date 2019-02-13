@@ -2,6 +2,7 @@ package contact;
 
 import contact.enums.SortableColums;
 import contact.enums.SortingOrder;
+import contact.enums.StateOfManager;
 import java.util.HashMap;
 import java.util.Scanner;
 

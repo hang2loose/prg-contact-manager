@@ -7,8 +7,8 @@ import static contact.enums.ManagerState.GET_COMMAND;
 import static contact.enums.ManagerState.INIT;
 import static contact.enums.ManagerState.PRINT_CONTACT_DETAILS;
 
-import contact.enums.SortableColums;
 import contact.enums.ManagerState;
+import contact.enums.SortableColums;
 import contact.enums.SortingOrder;
 import contact.services.ContactCardService;
 

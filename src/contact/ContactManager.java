@@ -72,7 +72,7 @@ public class ContactManager {
           break;
         case GET_CONTACT_BY_SEARCH_PARAM:
           TableManager.printContactsList(
-              contactCardService.getContactsBySearchParam(inputHandler.readSearchParameter()));
+              contactCardService.getSearchResult(inputHandler.readSearchParameter()));
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case END:

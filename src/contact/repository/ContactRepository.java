@@ -28,5 +28,5 @@ public interface ContactRepository extends Serializable {
 
   boolean readRepo(String nameOfRepository);
 
-  List<ContactCard> getListWithSearchParam(String searchParam);
+  List<ContactCard> getContactsBySearchParam(String searchParam);
 }

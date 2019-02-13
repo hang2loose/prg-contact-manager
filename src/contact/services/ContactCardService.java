@@ -157,13 +157,7 @@ public class ContactCardService {
     }
   }
 
-  public List<ContactCard> getContactsBySearchParam(String searchParam) {
-    return contactRepository.getAllContacts().stream()
-        .filter(contactCard -> contactCardContainsParam(contactCard, searchParam))
-        .collect(Collectors.toList());
-  }
-
-  private boolean contactCardContainsParam(ContactCard contactCard, String searchParam) {
-    return contactCard.toString().toLowerCase().contains(searchParam);
+  public List<ContactCard> getSearchResult(String readSearchParameter) {
+    return contactRepository.getContactsBySearchParam(readSearchParameter);
   }
 }

@@ -104,14 +104,13 @@ public class ContactRepositoryImpl implements ContactRepository, Serializable {
   }
 
   @Override
-  public List<ContactCard> getListWithSearchParam(String searchParam) {
+  public List<ContactCard> getContactsBySearchParam(String searchParam) {
     return contactCardMap.values().stream()
-        .filter(contactCard -> paramContainsInCard(contactCard, searchParam))
+        .filter(contactCard -> contactCardContainsParam(contactCard, searchParam))
         .collect(Collectors.toList());
   }
 
-  private boolean paramContainsInCard(ContactCard contactCard, String searchParam) {
-
-    return true;
+  private boolean contactCardContainsParam(ContactCard contactCard, String searchParam) {
+    return contactCard.toString().toLowerCase().contains(searchParam);
   }
 }

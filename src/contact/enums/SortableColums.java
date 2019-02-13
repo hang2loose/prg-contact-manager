@@ -1,7 +1,8 @@
 package contact.enums;
 
 public enum SortableColums {
-  NAME("Nachname"), SURNAME("Vorname");
+  SURNAME("Vorname"),
+  NAME("Nachname");
 
   private String representation;
 

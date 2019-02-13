@@ -8,7 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -43,12 +42,6 @@ public class ContactRepositoryImpl implements ContactRepository, Serializable {
   }
 
   @Override
-  public void saveAll(List<ContactCard> contactCardList) {
-    contactCardList
-        .forEach(contactCard -> contactCardMap.put(contactCard.getUid(), contactCard));
-  }
-
-  @Override
   public List<ContactCard> getAllContacts() {
     return new ArrayList<>(contactCardMap.values());
   }
@@ -56,29 +49,6 @@ public class ContactRepositoryImpl implements ContactRepository, Serializable {
   @Override
   public void deleteContactCard(UUID id) {
     contactCardMap.remove(id);
-  }
-
-  @Override
-  public Collection<ContactCard> getContactCardWithLastName(String name) {
-    return contactCardMap
-        .values()
-        .stream()
-        .filter(contactCard -> name.equalsIgnoreCase(contactCard.getPerson().getName()))
-        .collect(Collectors.toList());
-  }
-
-  @Override
-  public Collection<ContactCard> getContactCardWithSurName(String surName) {
-    return contactCardMap
-        .values()
-        .stream()
-        .filter(contactCard -> surName.equalsIgnoreCase(contactCard.getPerson().getSurname()))
-        .collect(Collectors.toList());
-  }
-
-  @Override
-  public int getSizeOfRepo() {
-    return contactCardMap.size();
   }
 
   @Override

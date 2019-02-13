@@ -10,6 +10,7 @@ import contact.model.Person;
 import contact.repository.ContactRepository;
 import contact.repository.ContactRepositoryImpl;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -78,25 +79,19 @@ public class ContactCardService {
   private ContactCard fillContact(ContactCardBuilder cardBuilder,
       HashMap<String, String> newContactInformations) {
     return cardBuilder
-        .withPerson(
-            Person
-                .getPersonBuilder()
-                .withSurname(newContactInformations.get("surname"))
-                .withName(newContactInformations.get("name"))
-                .build())
-        .withAddress(
-            Address
-                .getAddressBuilder()
-                .withCity(newContactInformations.get("city"))
-                .withZipCode(newContactInformations.get("zip"))
-                .withStreet(newContactInformations.get("street"))
-                .build())
-        .withCommunication(
-            Communication
-                .getCommunicationBuilder()
-                .withPhone(newContactInformations.get("phoneNumber"))
-                .withMail(newContactInformations.get("eMail"))
-                .build())
+        .withPerson(Person.getPersonBuilder()
+            .withSurname(newContactInformations.get("surname"))
+            .withName(newContactInformations.get("name"))
+            .build())
+        .withAddress(Address.getAddressBuilder()
+            .withCity(newContactInformations.get("city"))
+            .withZipCode(newContactInformations.get("zip"))
+            .withStreet(newContactInformations.get("street"))
+            .build())
+        .withCommunication(Communication.getCommunicationBuilder()
+            .withPhone(newContactInformations.get("phoneNumber"))
+            .withMail(newContactInformations.get("eMail"))
+            .build())
         .build();
   }
 
@@ -132,34 +127,28 @@ public class ContactCardService {
   }
 
   public List<ContactCard> orderContacts(SortableColums colum, SortingOrder order) {
-    switch (colum) {
+    if (order.equals(SortingOrder.DECSENDING)) {
+      List<ContactCard> tmp = getSortedContactStream(colum);
+      Collections.reverse(tmp);
+      return tmp;
+    }
+    return getSortedContactStream(colum);
+  }
+
+  private List<ContactCard> getSortedContactStream(SortableColums colums) {
+    switch (colums) {
       case SURNAME:
-        if (order.equals(SortingOrder.DECSENDING)) {
-          return contactRepository.getAllContacts().stream()
-              .sorted(
-                  Comparator.comparing(ContactCard::getPersonSurname, String::compareToIgnoreCase)
-                      .reversed())
-              .collect(Collectors.toList());
-        }
         return contactRepository.getAllContacts().stream()
             .sorted(
                 Comparator.comparing(ContactCard::getPersonSurname, String::compareToIgnoreCase))
             .collect(Collectors.toList());
       case NAME:
-        if (order.equals(SortingOrder.DECSENDING)) {
-          return contactRepository.getAllContacts().stream()
-              .sorted(
-                  Comparator.comparing(ContactCard::getPersonName, String::compareToIgnoreCase)
-                      .reversed())
-              .collect(Collectors.toList());
-        }
         return contactRepository.getAllContacts().stream()
             .sorted(
                 Comparator.comparing(ContactCard::getPersonName, String::compareToIgnoreCase))
             .collect(Collectors.toList());
       default:
-        System.out.println("Error");
-        return null;
+        return contactRepository.getAllContacts();
     }
   }
 

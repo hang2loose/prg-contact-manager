@@ -138,6 +138,7 @@ public class ContactManager {
     System.out.println("########################################################################");
     System.out.println("#                         Contact Manager v1.0                         #");
     System.out.println("########################################################################");
+    System.out.println();
   }
 
   private static void clear() {

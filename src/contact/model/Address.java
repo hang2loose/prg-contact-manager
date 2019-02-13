@@ -4,17 +4,11 @@ import java.io.Serializable;
 
 public class Address implements Serializable {
 
-  String country = "";
   String city = "";
   String zipCode = "";
   String street = "";
-  String streetNumber = "";
 
   Address() {
-  }
-
-  public String getCountry() {
-    return country;
   }
 
   public String getCity() {
@@ -27,10 +21,6 @@ public class Address implements Serializable {
 
   public String getStreet() {
     return street;
-  }
-
-  public String getStreetNumber() {
-    return streetNumber;
   }
 
   public static AddressBuilder getAddressBuilder() {

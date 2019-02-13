@@ -12,11 +12,6 @@ public class ContactCardBuilder {
     this.contactCardUnderConstruction = contactCardUnderConstruction;
   }
 
-  public ContactCardBuilder withAddress(Address address) {
-    contactCardUnderConstruction.address = address;
-    return this;
-  }
-
   public ContactCardBuilder withPerson(Person person) {
     contactCardUnderConstruction.person = person;
     return this;
@@ -24,6 +19,11 @@ public class ContactCardBuilder {
 
   public ContactCardBuilder withCommunication(Communication communication) {
     contactCardUnderConstruction.communication = communication;
+    return this;
+  }
+
+  public ContactCardBuilder withAddress(Address address) {
+    contactCardUnderConstruction.address = address;
     return this;
   }
 

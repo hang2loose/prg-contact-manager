@@ -172,6 +172,6 @@ class InputHandler {
 
   String readSearchParameter() {
     System.out.print("Geben Sie einen Suchbegriff ein: ");
-    return readParameter();
+    return readParameter().toLowerCase();
   }
 }

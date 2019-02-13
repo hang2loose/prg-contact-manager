@@ -4,12 +4,8 @@ public class PersonBuilder {
 
   private Person personUnderConstruction;
 
-  public PersonBuilder() {
+  PersonBuilder() {
     this.personUnderConstruction = new Person();
-  }
-
-  public PersonBuilder(Person personUnderConstruction) {
-    this.personUnderConstruction = personUnderConstruction;
   }
 
   public PersonBuilder withName(String name) {

@@ -1,8 +1,8 @@
 package contact;
 
 import contact.enums.SortableColums;
-import contact.enums.SortingOrder;
 import contact.enums.ManagerState;
+import contact.enums.SortingOrder;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -51,7 +51,7 @@ class InputHandler {
     System.out.println("[B] Beenden");
   }
 
-  HashMap<String, String> getNewContactInformations() {
+  HashMap<String, String> getNewContactInformation() {
     HashMap<String, String> newContactInformations = new HashMap<>();
     System.out.print("Vorname: ");
     newContactInformations.put("surname", readParameter());
@@ -75,13 +75,13 @@ class InputHandler {
     newContactInformations.put("city", readParameter());
     System.out.println();
 
-    if (!askForComfirmation()) {
+    if (!askForConfirmation()) {
       newContactInformations.clear();
     }
     return newContactInformations;
   }
 
-  private boolean askForComfirmation() {
+  private boolean askForConfirmation() {
     System.out.println("[S] Änderung speichern ");
     System.out.println("[A] Abbrechen? ");
 
@@ -94,7 +94,7 @@ class InputHandler {
         return true;
       default:
         System.out.println(input + " Character not a Command!");
-        return askForComfirmation();
+        return askForConfirmation();
     }
   }
 
@@ -130,16 +130,11 @@ class InputHandler {
     return input;
   }
 
-  String getNameOfRepository() {
-    System.out.println("Bitte gib den Namen für dein Addressbuch ein:");
-    return readParameter().trim();
-  }
-
   private String readParameter() {
     return scanner.nextLine();
   }
 
-  public SortableColums getColum() {
+  SortableColums getColumn() {
     System.out.println("Nach welcher Spalte soll Sortiert werden?");
     System.out.println("[V] Vorname");
     System.out.println("[N] Nachname");
@@ -153,11 +148,11 @@ class InputHandler {
         return SortableColums.NAME;
       default:
         System.out.println("Es kann nur nach Vor oder Nachname sortiert werden?");
-        return getColum();
+        return getColumn();
     }
   }
 
-  public SortingOrder getOrder(SortableColums columName) {
+  SortingOrder getOrder(SortableColums columName) {
     System.out.println("Wie soll die Spalte " + columName.getRepresentation() + " sortiert sein?");
     System.out.println("[1] Aufsteigend");
     System.out.println("[2] Absteigend");
@@ -172,7 +167,7 @@ class InputHandler {
     }
   }
 
-  public String readSearchParameter() {
+  String readSearchParameter() {
     System.out.print("Geben Sie einen Suchbegriff ein: ");
     return readParameter();
   }

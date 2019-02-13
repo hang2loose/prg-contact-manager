@@ -8,7 +8,7 @@ class TableManager {
   private TableManager() {
   }
 
-  public static void printContactCard(ContactCard contactCard) {
+  static void printContactCard(ContactCard contactCard) {
     System.out.println("| " + contactCard.getPerson().getSurname());
     System.out.println("| " + contactCard.getPerson().getName());
     System.out.println("| " + contactCard.getCommunication().getPhone());
@@ -19,7 +19,8 @@ class TableManager {
         + " " + contactCard.getAddress().getCity());
   }
 
-  public static void printContactsList(List<ContactCard> contactCardList) {
+  static void printContactsList(List<ContactCard> contactCardList) {
+    System.out.println("Ihre Kontakte: \n");
     firstTableRow();
     contactCardList
         .forEach(contactCard -> printCard(contactCard, contactCardList.indexOf(contactCard) + 1));

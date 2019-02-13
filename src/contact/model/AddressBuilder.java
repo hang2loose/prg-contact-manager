@@ -8,10 +8,6 @@ public class AddressBuilder {
     this.addressUnderConstruction = new Address();
   }
 
-  AddressBuilder(Address addressUnderConstruction) {
-    this.addressUnderConstruction = addressUnderConstruction;
-  }
-
   public AddressBuilder withCity(String city) {
     addressUnderConstruction.city = city;
     return this;

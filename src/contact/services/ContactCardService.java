@@ -78,19 +78,25 @@ public class ContactCardService {
   private ContactCard fillContact(ContactCardBuilder cardBuilder,
       HashMap<String, String> newContactInformations) {
     return cardBuilder
-        .withPerson(Person.getPersonBuilder()
-            .withSurname(newContactInformations.get("surname"))
-            .withName(newContactInformations.get("name"))
-            .build())
-        .withAddress(Address.getAddressBuilder()
-            .withCity(newContactInformations.get("city"))
-            .withZipCode(newContactInformations.get("zip"))
-            .withStreet(newContactInformations.get("street"))
-            .build())
-        .withCommunication(Communication.getCommunicationBuilder()
-            .withPhone(newContactInformations.get("phoneNumber"))
-            .withMail(newContactInformations.get("eMail"))
-            .build())
+        .withPerson(
+            Person
+                .getPersonBuilder()
+                .withSurname(newContactInformations.get("surname"))
+                .withName(newContactInformations.get("name"))
+                .build())
+        .withAddress(
+            Address
+                .getAddressBuilder()
+                .withCity(newContactInformations.get("city"))
+                .withZipCode(newContactInformations.get("zip"))
+                .withStreet(newContactInformations.get("street"))
+                .build())
+        .withCommunication(
+            Communication
+                .getCommunicationBuilder()
+                .withPhone(newContactInformations.get("phoneNumber"))
+                .withMail(newContactInformations.get("eMail"))
+                .build())
         .build();
   }
 
@@ -117,7 +123,7 @@ public class ContactCardService {
         .collect(Collectors.toList());
   }
 
-  public boolean wirteData(String nameOfRepository) {
+  public boolean writeData(String nameOfRepository) {
     return contactRepository.wirteRepo(nameOfRepository);
   }
 

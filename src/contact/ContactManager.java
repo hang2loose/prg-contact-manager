@@ -8,8 +8,8 @@ import static contact.enums.ManagerState.INIT;
 import static contact.enums.ManagerState.PRINT_CONTACT_DETAILS;
 
 import contact.enums.SortableColums;
-import contact.enums.SortingOrder;
 import contact.enums.ManagerState;
+import contact.enums.SortingOrder;
 import contact.services.ContactCardService;
 
 
@@ -49,12 +49,11 @@ public class ContactManager {
         case GET_ALL_CONTACTS:
           clear();
           executeSaveRepo();
-          System.out.println("Ihre Kontakte: \n");
           TableManager.printContactsList(contactCardService.getAllCards());
           managerState = GET_COMMAND;
           break;
         case CREATE_NEW_CONTACT:
-          contactCardService.createNewContact(inputHandler.getNewContactInformations());
+          contactCardService.createNewContact(inputHandler.getNewContactInformation());
           managerState = GET_ALL_CONTACTS;
           break;
         case DELETE_CONTACT:
@@ -85,7 +84,7 @@ public class ContactManager {
   }
 
   private ManagerState executeContactInOrder() {
-    SortableColums colum = inputHandler.getColum();
+    SortableColums colum = inputHandler.getColumn();
     SortingOrder order = inputHandler.getOrder(colum);
     System.out.println("Ihre sortierten Kontakte: \n");
     TableManager.printContactsList(contactCardService.orderContacts(colum, order));
@@ -96,13 +95,13 @@ public class ContactManager {
     if (!contactCardService.readData("contacts")) {
       ContactCardService.getInstance().initRepoWithDummyData();
       executeSaveRepo();
-      System.out.println("Repository initialized with Dummy data");
+      System.out.println("Repository initialized with Dummy Data");
     }
     return GET_COMMAND;
   }
 
   private ManagerState executeSaveRepo() {
-    if (!contactCardService.wirteData("contacts")) {
+    if (!contactCardService.writeData("contacts")) {
       System.out.println("Error: Repository was not saved");
     }
     return GET_COMMAND;
@@ -134,10 +133,10 @@ public class ContactManager {
     int indexId = inputHandler.getContactIndex(EDIT_CONTACT);
 
     if (contactCardService.repoContainsIndex(indexId)) {
-      contactCardService.editContactById(indexId, inputHandler.getNewContactInformations());
+      contactCardService.editContactById(indexId, inputHandler.getNewContactInformation());
       return GET_ALL_CONTACTS;
     }
-    System.out.println("Index not found!!!!");
+    System.out.println("404: Index not found");
     return GET_COMMAND;
   }
 

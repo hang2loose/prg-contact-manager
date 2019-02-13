@@ -4,11 +4,11 @@ public class ContactCardBuilder {
 
   private ContactCard contactCardUnderConstruction;
 
-  public ContactCardBuilder() {
+  ContactCardBuilder() {
     this.contactCardUnderConstruction = new ContactCard();
   }
 
-  public ContactCardBuilder(ContactCard contactCardUnderConstruction) {
+  ContactCardBuilder(ContactCard contactCardUnderConstruction) {
     this.contactCardUnderConstruction = contactCardUnderConstruction;
   }
 

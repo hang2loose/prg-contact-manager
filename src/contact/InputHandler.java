@@ -152,13 +152,12 @@ class InputHandler {
         return SortableColums.NAME;
       default:
         System.out.println("Es kann nur nach Vor oder Nachname sortiert werden?");
-        getColum();
+        return getColum();
     }
-    return null;
   }
 
   public SortingOrder getOrder(SortableColums columName) {
-    System.out.println("Wie soll die Spalte " + columName.name() + " sortiert sein?");
+    System.out.println("Wie soll die Spalte " + columName.getRepresentation() + " sortiert sein?");
     System.out.println("[1] Aufsteigend");
     System.out.println("[2] Absteigend");
 

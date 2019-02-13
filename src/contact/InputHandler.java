@@ -1,5 +1,7 @@
 package contact;
 
+import contact.enums.SortableColums;
+import contact.enums.SortingOrder;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -24,10 +26,10 @@ class InputHandler {
         return StateOfManager.PRINT_CONTACT_DETAILS;
       case 'l':
         return StateOfManager.DELETE_CONTACT;
-      case 'r':
-        return StateOfManager.LOAD_REPOSITORY;
+      case 'o':
+        return StateOfManager.GET_CONTACT_IN_ORDER;
       case 's':
-        return StateOfManager.SAVE_REPOSITORY;
+        return StateOfManager.GET_CONTACT_BY_SEARCH_PARAM;
       case 'b':
         return StateOfManager.END;
       default:
@@ -39,12 +41,12 @@ class InputHandler {
   private static void prtintCommands() {
     System.out.println("\n\n");
     System.out.println("[A] Alle Kontakte anzeigen");
+    System.out.println("[O] Alle Kontakte Sortiert");
     System.out.println("[N] Neuen Kontakt erstellen");
     System.out.println("[K] Kontakt bearbeiten");
     System.out.println("[D] Kontaktdetails anzeigen");
+    System.out.println("[S] Kontakt suchen");
     System.out.println("[L] Kontakt loeschen");
-    System.out.println("[S] Speichere Addressbuch");
-    System.out.println("[R] Lade Addressbuch");
     System.out.println("[B] Beenden");
   }
 
@@ -134,5 +136,44 @@ class InputHandler {
 
   private String readParameter() {
     return scanner.nextLine();
+  }
+
+  public SortableColums getColum() {
+    System.out.println("Nach welcher Spalte soll Sortiert werden?");
+    System.out.println("[V] Vorname");
+    System.out.println("[N] Nachname");
+
+    char colum = getCharacterCommand();
+
+    switch (colum) {
+      case 'v':
+        return SortableColums.SURNAME;
+      case 'n':
+        return SortableColums.NAME;
+      default:
+        System.out.println("Es kann nur nach Vor oder Nachname sortiert werden?");
+        getColum();
+    }
+    return null;
+  }
+
+  public SortingOrder getOrder(SortableColums columName) {
+    System.out.println("Wie soll die Spalte " + columName.name() + " sortiert sein?");
+    System.out.println("[1] Aufsteigend");
+    System.out.println("[2] Absteigend");
+
+    switch (getCharacterCommand()) {
+      case '1':
+        return SortingOrder.ASCENDING;
+      case '2':
+        return SortingOrder.DECSENDING;
+      default:
+        return getOrder(columName);
+    }
+  }
+
+  public String readSearchParameter() {
+    System.out.print("Geben Sie einen Suchbegriff ein: ");
+    return readParameter();
   }
 }

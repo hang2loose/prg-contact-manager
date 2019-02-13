@@ -5,7 +5,6 @@ import java.util.List;
 
 class TableManager {
 
-
   private TableManager() {
   }
 
@@ -16,8 +15,8 @@ class TableManager {
     System.out.println("| " + contactCard.getCommunication().getMail());
     System.out.println();
     System.out.println("| " + contactCard.getAddress().getStreet());
-    System.out.println(
-        "| " + contactCard.getAddress().getZipCode() + " " + contactCard.getAddress().getCity());
+    System.out.println("| " + contactCard.getAddress().getZipCode()
+        + " " + contactCard.getAddress().getCity());
   }
 
   public static void printContactsList(List<ContactCard> contactCardList) {
@@ -27,7 +26,7 @@ class TableManager {
   }
 
   private static void firstTableRow() {
-    System.out.printf("%19s%16s%26s%29s%n", "Surname", "Name", "Phone", "Mail");
+    System.out.printf("%19s%16s%26s%29s%n", "Vorname", "Nachname", "Telefon", "eMail");
     for (int i = 0; i < 90; i++) {
       System.out.print("-");
     }
@@ -36,13 +35,12 @@ class TableManager {
 
   private static void printCard(ContactCard contactCard, int index) {
     String name = getEllipsis(contactCard.getPerson().getName(), 15);
-    String surName = getEllipsis(contactCard.getPerson().getSurname(), 15);
+    String surname = getEllipsis(contactCard.getPerson().getSurname(), 15);
     String phone = getEllipsis(contactCard.getCommunication().getPhone(), 20);
-    String mail = getEllipsis(contactCard.getCommunication().getMail(), 22);
+    String mail = getEllipsis(contactCard.getCommunication().getMail(), 25);
 
-    System.out.printf("%d%18s%16s%26s%29s%n", index, surName, name, phone, mail);
+    System.out.printf("%2d%17s%16s%26s%29s%n", index, surname, name, phone, mail);
   }
-
 
   private static String getEllipsis(String inputString, int maxLenght) {
     if (inputString.length() <= maxLenght - 3) {

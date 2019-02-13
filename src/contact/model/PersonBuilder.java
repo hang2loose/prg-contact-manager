@@ -22,21 +22,6 @@ public class PersonBuilder {
     return this;
   }
 
-  public PersonBuilder withGender(String gender) {
-    personUnderConstruction.gender = Gender.fromString(gender);
-    return this;
-  }
-
-  public PersonBuilder withTitle(String title) {
-    personUnderConstruction.title = title;
-    return this;
-  }
-
-  public PersonBuilder withBirthdate(String birthday) {
-    personUnderConstruction.birthday = birthday;
-    return this;
-  }
-
   public Person build() {
     return personUnderConstruction;
   }

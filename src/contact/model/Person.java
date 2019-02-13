@@ -2,34 +2,9 @@ package contact.model;
 
 import java.io.Serializable;
 
-enum Gender implements Serializable {
-  NONE("n"), DIVERSE("d"), FEMALE("f"), MALE("m");
-
-  private String representation;
-
-  Gender(String representation) {
-    this.representation = representation;
-  }
-
-  public static Gender fromString(String representation) {
-    for (Gender gender : Gender.values()) {
-      if (gender.representation.equalsIgnoreCase(representation)) {
-        return gender;
-      }
-    }
-    throw new IllegalArgumentException("Representation of Gender not allowed!!!!");
-  }
-
-}
-
 public class Person implements Serializable {
   String surname = "";
   String name = "";
-
-  String title = "";
-  String birthday = "";
-
-  Gender gender = Gender.NONE;
 
   Person() {
   }
@@ -42,19 +17,12 @@ public class Person implements Serializable {
     return name;
   }
 
-  public String getTitle() {
-    return title;
-  }
-
-  public String getBirthday() {
-    return birthday;
-  }
-
-  public Gender getGender() {
-    return gender;
-  }
-
   public static PersonBuilder getPersonBuilder() {
     return new PersonBuilder();
+  }
+
+  @Override
+  public String toString() {
+    return surname + " " + name + " ";
   }
 }

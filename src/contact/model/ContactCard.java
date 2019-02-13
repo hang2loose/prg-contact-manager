@@ -9,9 +9,9 @@ public class ContactCard implements Serializable {
 
   private UUID id;
 
-  Address address;
-  Communication communication;
   Person person;
+  Communication communication;
+  Address address;
 
   ContactCard() {
     this.id = UUID.randomUUID();
@@ -21,20 +21,24 @@ public class ContactCard implements Serializable {
     return id;
   }
 
-  public Address getAddress() {
-    return address;
+  public Person getPerson() {
+    return person;
   }
 
   public Communication getCommunication() {
     return communication;
   }
 
-  public Person getPerson() {
-    return person;
+  public Address getAddress() {
+    return address;
   }
 
   public String getPersonName() {
     return person.name;
+  }
+
+  public String getPersonSurname() {
+    return person.surname;
   }
 
   public ContactCardBuilder getEditContactCard() {
@@ -43,5 +47,10 @@ public class ContactCard implements Serializable {
 
   public static ContactCardBuilder getContactCardBuilder() {
     return new ContactCardBuilder();
+  }
+
+  @Override
+  public String toString() {
+    return person.toString() + communication.toString() + address.toString();
   }
 }

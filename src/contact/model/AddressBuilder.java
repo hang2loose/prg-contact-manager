@@ -12,11 +12,6 @@ public class AddressBuilder {
     this.addressUnderConstruction = addressUnderConstruction;
   }
 
-  public AddressBuilder withCountry(String country) {
-    addressUnderConstruction.country = country;
-    return this;
-  }
-
   public AddressBuilder withCity(String city) {
     addressUnderConstruction.city = city;
     return this;
@@ -29,11 +24,6 @@ public class AddressBuilder {
 
   public AddressBuilder withStreet(String street) {
     addressUnderConstruction.street = street;
-    return this;
-  }
-
-  public AddressBuilder withStreetNumber(String streetNumber) {
-    addressUnderConstruction.streetNumber = streetNumber;
     return this;
   }
 

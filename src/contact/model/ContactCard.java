@@ -37,6 +37,10 @@ public class ContactCard implements Serializable {
     return person.name;
   }
 
+  public String getPersonSurname() {
+    return person.surname;
+  }
+
   public ContactCardBuilder getEditContactCard() {
     return new ContactCardBuilder(this);
   }

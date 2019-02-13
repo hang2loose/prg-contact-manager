@@ -1,5 +1,7 @@
 package contact;
 
+import contact.enums.SortableColums;
+import contact.enums.SortingOrder;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -25,7 +27,7 @@ class InputHandler {
       case 'l':
         return StateOfManager.DELETE_CONTACT;
       case 'o':
-        return StateOfManager.NOT_IMPLEMENTET;
+        return StateOfManager.GET_CONTACT_IN_ORDER;
       case 's':
         return StateOfManager.NOT_IMPLEMENTET;
       case 'b':
@@ -134,5 +136,39 @@ class InputHandler {
 
   private String readParameter() {
     return scanner.nextLine();
+  }
+
+  public SortableColums getColum() {
+    System.out.println("Nach welcher Spalte soll Sortiert werden?");
+    System.out.println("[V] Vorname");
+    System.out.println("[N] Nachname");
+
+    char colum = getCharacterCommand();
+
+    switch (colum) {
+      case 'v':
+        return SortableColums.SURNAME;
+      case 'n':
+        return SortableColums.NAME;
+      default:
+        System.out.println("Es kann nur nach Vor oder Nachname sortiert werden?");
+        getColum();
+    }
+    return null;
+  }
+
+  public SortingOrder getOrder(SortableColums columName) {
+    System.out.println("Wie soll die Spalte " + columName.name() + " sortiert sein?");
+    System.out.println("[1] Aufsteigend");
+    System.out.println("[2] Absteigend");
+
+    switch (getCharacterCommand()) {
+      case '1':
+        return SortingOrder.ASCENDING;
+      case '2':
+        return SortingOrder.DECSENDING;
+      default:
+        return getOrder(columName);
+    }
   }
 }

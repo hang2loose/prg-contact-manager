@@ -1,10 +1,13 @@
 package contact;
 
+import contact.enums.SortableColums;
+import contact.enums.SortingOrder;
 import contact.services.ContactCardService;
 
 enum StateOfManager {
   GET_COMMAND, END, INIT, CREATE_NEW_CONTACT, DELETE_CONTACT, EDIT_CONTACT,
-  PRINT_CONTACT_DETAILS, SAVE_REPOSITORY, LOAD_REPOSITORY, NOT_IMPLEMENTET, GET_ALL_CONTACTS
+  PRINT_CONTACT_DETAILS, SAVE_REPOSITORY, LOAD_REPOSITORY, NOT_IMPLEMENTET, GET_CONTACT_IN_ORDER,
+  GET_ALL_CONTACTS
 }
 
 public class ContactManager {
@@ -58,6 +61,12 @@ public class ContactManager {
           break;
         case PRINT_CONTACT_DETAILS:
           stateOfManager = executePrintDetails();
+          break;
+        case GET_CONTACT_IN_ORDER:
+          SortableColums colum = inputHandler.getColum();
+          SortingOrder order = inputHandler.getOrder(colum);
+          TableManager.printContactsList(contactCardService.orderContacts(colum, order));
+          stateOfManager = StateOfManager.GET_COMMAND;
           break;
         case NOT_IMPLEMENTET:
           System.out.println("Not Implementet yet");

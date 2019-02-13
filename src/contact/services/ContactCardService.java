@@ -1,5 +1,7 @@
 package contact.services;
 
+import contact.enums.SortableColums;
+import contact.enums.SortingOrder;
 import contact.model.Address;
 import contact.model.Communication;
 import contact.model.ContactCard;
@@ -7,6 +9,7 @@ import contact.model.ContactCardBuilder;
 import contact.model.Person;
 import contact.repository.ContactRepository;
 import contact.repository.ContactRepositoryImpl;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -35,9 +38,7 @@ public class ContactCardService {
   }
 
   private void updateRepresentationMap() {
-    List<ContactCard> tmp = contactRepository.getAllContacts().stream()
-        .sorted(Comparator.comparing(ContactCard::getPersonName, String::compareToIgnoreCase))
-        .collect(Collectors.toList());
+    List<ContactCard> tmp = new ArrayList<>(contactRepository.getAllContacts());
     representationMap.clear();
     for (ContactCard contactCard : tmp) {
       representationMap.put(tmp.indexOf(contactCard) + 1, contactCard.getUid());
@@ -122,5 +123,37 @@ public class ContactCardService {
 
   public boolean readData(String nameOfRepository) {
     return contactRepository.readRepo(nameOfRepository);
+  }
+
+  public List<ContactCard> orderContacts(SortableColums colum, SortingOrder order) {
+    switch (colum) {
+      case SURNAME:
+        if (order.equals(SortingOrder.DECSENDING)) {
+          return contactRepository.getAllContacts().stream()
+              .sorted(
+                  Comparator.comparing(ContactCard::getPersonSurname, String::compareToIgnoreCase)
+                      .reversed())
+              .collect(Collectors.toList());
+        }
+        return contactRepository.getAllContacts().stream()
+            .sorted(
+                Comparator.comparing(ContactCard::getPersonSurname, String::compareToIgnoreCase))
+            .collect(Collectors.toList());
+      case NAME:
+        if (order.equals(SortingOrder.DECSENDING)) {
+          return contactRepository.getAllContacts().stream()
+              .sorted(
+                  Comparator.comparing(ContactCard::getPersonName, String::compareToIgnoreCase)
+                      .reversed())
+              .collect(Collectors.toList());
+        }
+        return contactRepository.getAllContacts().stream()
+            .sorted(
+                Comparator.comparing(ContactCard::getPersonName, String::compareToIgnoreCase))
+            .collect(Collectors.toList());
+      default:
+        System.out.println("Error");
+        return null;
+    }
   }
 }

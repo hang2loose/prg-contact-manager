@@ -46,6 +46,7 @@ public class ContactManager {
         case GET_ALL_CONTACTS:
           clear();
           executeSaveRepo();
+          System.out.println("Ihre Kontakte: \n");
           TableManager.printContactsList(contactCardService.getAllCards());
           stateOfManager = StateOfManager.GET_COMMAND;
           break;
@@ -65,6 +66,7 @@ public class ContactManager {
         case GET_CONTACT_IN_ORDER:
           SortableColums colum = inputHandler.getColum();
           SortingOrder order = inputHandler.getOrder(colum);
+          System.out.println("Ihre sortierten Kontakte: \n");
           TableManager.printContactsList(contactCardService.orderContacts(colum, order));
           stateOfManager = StateOfManager.GET_COMMAND;
           break;

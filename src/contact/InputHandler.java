@@ -2,7 +2,7 @@ package contact;
 
 import contact.enums.SortableColums;
 import contact.enums.SortingOrder;
-import contact.enums.StateOfManager;
+import contact.enums.ManagerState;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ class InputHandler {
 
   private Scanner scanner = new Scanner(System.in);
 
-  StateOfManager getInput() {
+  ManagerState getInput() {
     prtintCommands();
 
     System.out.print("> ");
@@ -18,24 +18,24 @@ class InputHandler {
 
     switch (command) {
       case 'a':
-        return StateOfManager.GET_ALL_CONTACTS;
+        return ManagerState.GET_ALL_CONTACTS;
       case 'o':
-        return StateOfManager.GET_CONTACT_IN_ORDER;
+        return ManagerState.GET_CONTACT_IN_ORDER;
       case 'n':
-        return StateOfManager.CREATE_NEW_CONTACT;
+        return ManagerState.CREATE_NEW_CONTACT;
       case 'k':
-        return StateOfManager.EDIT_CONTACT;
+        return ManagerState.EDIT_CONTACT;
       case 'd':
-        return StateOfManager.PRINT_CONTACT_DETAILS;
+        return ManagerState.PRINT_CONTACT_DETAILS;
       case 's':
-        return StateOfManager.GET_CONTACT_BY_SEARCH_PARAM;
+        return ManagerState.GET_CONTACT_BY_SEARCH_PARAM;
       case 'l':
-        return StateOfManager.DELETE_CONTACT;
+        return ManagerState.DELETE_CONTACT;
       case 'b':
-        return StateOfManager.END;
+        return ManagerState.END;
       default:
         System.out.println(command + " is not an valid command for this Manager");
-        return StateOfManager.GET_COMMAND;
+        return ManagerState.GET_COMMAND;
     }
   }
 
@@ -107,7 +107,7 @@ class InputHandler {
     return inputString.toLowerCase().charAt(0);
   }
 
-  int getContactIndex(StateOfManager state) {
+  int getContactIndex(ManagerState state) {
     switch (state) {
       case EDIT_CONTACT:
         System.out.print("Welchen Kontakt möchten sie bearbeiten? ");

@@ -1,15 +1,15 @@
 package contact;
 
-import static contact.enums.StateOfManager.DELETE_CONTACT;
-import static contact.enums.StateOfManager.EDIT_CONTACT;
-import static contact.enums.StateOfManager.GET_ALL_CONTACTS;
-import static contact.enums.StateOfManager.GET_COMMAND;
-import static contact.enums.StateOfManager.INIT;
-import static contact.enums.StateOfManager.PRINT_CONTACT_DETAILS;
+import static contact.enums.ManagerState.DELETE_CONTACT;
+import static contact.enums.ManagerState.EDIT_CONTACT;
+import static contact.enums.ManagerState.GET_ALL_CONTACTS;
+import static contact.enums.ManagerState.GET_COMMAND;
+import static contact.enums.ManagerState.INIT;
+import static contact.enums.ManagerState.PRINT_CONTACT_DETAILS;
 
 import contact.enums.SortableColums;
 import contact.enums.SortingOrder;
-import contact.enums.StateOfManager;
+import contact.enums.ManagerState;
 import contact.services.ContactCardService;
 
 
@@ -33,46 +33,46 @@ public class ContactManager {
     contactCardService = ContactCardService.getInstance();
   }
 
-  private StateOfManager stateOfManager = INIT;
+  private ManagerState managerState = INIT;
 
   public void runContactManager() {
     while (true) {
-      switch (stateOfManager) {
+      switch (managerState) {
         case INIT:
           start();
           executeLoadRepo();
-          stateOfManager = GET_COMMAND;
+          managerState = GET_COMMAND;
           break;
         case GET_COMMAND:
-          stateOfManager = inputHandler.getInput();
+          managerState = inputHandler.getInput();
           break;
         case GET_ALL_CONTACTS:
           clear();
           executeSaveRepo();
           System.out.println("Ihre Kontakte: \n");
           TableManager.printContactsList(contactCardService.getAllCards());
-          stateOfManager = GET_COMMAND;
+          managerState = GET_COMMAND;
           break;
         case CREATE_NEW_CONTACT:
           contactCardService.createNewContact(inputHandler.getNewContactInformations());
-          stateOfManager = GET_ALL_CONTACTS;
+          managerState = GET_ALL_CONTACTS;
           break;
         case DELETE_CONTACT:
-          stateOfManager = executeDeleteContact();
+          managerState = executeDeleteContact();
           break;
         case EDIT_CONTACT:
-          stateOfManager = executeEditContact();
+          managerState = executeEditContact();
           break;
         case PRINT_CONTACT_DETAILS:
-          stateOfManager = executePrintDetails();
+          managerState = executePrintDetails();
           break;
         case GET_CONTACT_IN_ORDER:
-          stateOfManager = executeContactInOrder();
+          managerState = executeContactInOrder();
           break;
         case GET_CONTACT_BY_SEARCH_PARAM:
           TableManager.printContactsList(
               contactCardService.getSearchResult(inputHandler.readSearchParameter()));
-          stateOfManager = GET_COMMAND;
+          managerState = GET_COMMAND;
           break;
         case END:
           System.out.println("Auf Wiedersehen!");
@@ -84,7 +84,7 @@ public class ContactManager {
     }
   }
 
-  private StateOfManager executeContactInOrder() {
+  private ManagerState executeContactInOrder() {
     SortableColums colum = inputHandler.getColum();
     SortingOrder order = inputHandler.getOrder(colum);
     System.out.println("Ihre sortierten Kontakte: \n");
@@ -92,7 +92,7 @@ public class ContactManager {
     return GET_COMMAND;
   }
 
-  private StateOfManager executeLoadRepo() {
+  private ManagerState executeLoadRepo() {
     if (!contactCardService.readData("contacts")) {
       ContactCardService.getInstance().initRepoWithDummyData();
       executeSaveRepo();
@@ -101,14 +101,14 @@ public class ContactManager {
     return GET_COMMAND;
   }
 
-  private StateOfManager executeSaveRepo() {
+  private ManagerState executeSaveRepo() {
     if (!contactCardService.wirteData("contacts")) {
       System.out.println("Error: Repository was not saved");
     }
     return GET_COMMAND;
   }
 
-  private StateOfManager executePrintDetails() {
+  private ManagerState executePrintDetails() {
     int index = inputHandler.getContactIndex(PRINT_CONTACT_DETAILS);
 
     if (contactCardService.repoContainsIndex(index)) {
@@ -119,7 +119,7 @@ public class ContactManager {
     return GET_COMMAND;
   }
 
-  private StateOfManager executeDeleteContact() {
+  private ManagerState executeDeleteContact() {
     int indexId = inputHandler.getContactIndex(DELETE_CONTACT);
 
     if (contactCardService.repoContainsIndex(indexId)) {
@@ -130,7 +130,7 @@ public class ContactManager {
     return GET_COMMAND;
   }
 
-  private StateOfManager executeEditContact() {
+  private ManagerState executeEditContact() {
     int indexId = inputHandler.getContactIndex(EDIT_CONTACT);
 
     if (contactCardService.repoContainsIndex(indexId)) {

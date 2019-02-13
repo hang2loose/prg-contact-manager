@@ -19,18 +19,18 @@ class InputHandler {
     switch (command) {
       case 'a':
         return StateOfManager.GET_ALL_CONTACTS;
+      case 'o':
+        return StateOfManager.GET_CONTACT_IN_ORDER;
       case 'n':
         return StateOfManager.CREATE_NEW_CONTACT;
       case 'k':
         return StateOfManager.EDIT_CONTACT;
       case 'd':
         return StateOfManager.PRINT_CONTACT_DETAILS;
-      case 'l':
-        return StateOfManager.DELETE_CONTACT;
-      case 'o':
-        return StateOfManager.GET_CONTACT_IN_ORDER;
       case 's':
         return StateOfManager.GET_CONTACT_BY_SEARCH_PARAM;
+      case 'l':
+        return StateOfManager.DELETE_CONTACT;
       case 'b':
         return StateOfManager.END;
       default:

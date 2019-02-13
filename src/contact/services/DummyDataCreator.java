@@ -24,6 +24,8 @@ class DummyDataCreator {
             Address
                 .getAddressBuilder()
                 .withCity("Freiburg")
+                .withZipCode("79100")
+                .withStreet("Bertholdsbrunnen 144")
                 .build())
         .withCommunication(
             Communication

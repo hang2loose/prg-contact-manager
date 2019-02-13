@@ -110,12 +110,15 @@ class InputHandler {
   int getContactIndex(ManagerState state) {
     switch (state) {
       case EDIT_CONTACT:
+        System.out.println("\n\n");
         System.out.print("Welchen Kontakt möchten sie bearbeiten? ");
         break;
       case DELETE_CONTACT:
+        System.out.println("\n\n");
         System.out.print("Welchen Kontakt möchten sie löschen? ");
         break;
       case PRINT_CONTACT_DETAILS:
+        System.out.println("\n\n");
         System.out.println("Welchen Kontakt möchten sie ansehen? ");
         break;
       default:

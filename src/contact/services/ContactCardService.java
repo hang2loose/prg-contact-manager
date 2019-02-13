@@ -126,16 +126,19 @@ public class ContactCardService {
     return contactRepository.readRepo(nameOfRepository);
   }
 
-  public List<ContactCard> orderContacts(SortableColums colum, SortingOrder order) {
+  public List<ContactCard> orderContacts(SortableColums column, SortingOrder order) {
+
+    List<ContactCard> sortedList = getSortedContactList(column);
+
     if (order.equals(SortingOrder.DECSENDING)) {
-      List<ContactCard> tmp = getSortedContactStream(colum);
-      Collections.reverse(tmp);
-      return tmp;
+      Collections.reverse(sortedList);
+      return sortedList;
     }
-    return getSortedContactStream(colum);
+
+    return sortedList;
   }
 
-  private List<ContactCard> getSortedContactStream(SortableColums colums) {
+  private List<ContactCard> getSortedContactList(SortableColums colums) {
     switch (colums) {
       case SURNAME:
         return contactRepository.getAllContacts().stream()

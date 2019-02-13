@@ -27,4 +27,6 @@ public interface ContactRepository extends Serializable {
   boolean wirteRepo(String nameOfRepository);
 
   boolean readRepo(String nameOfRepository);
+
+  List<ContactCard> getListWithSearchParam(String searchParam);
 }

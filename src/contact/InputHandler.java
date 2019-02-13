@@ -24,10 +24,10 @@ class InputHandler {
         return StateOfManager.PRINT_CONTACT_DETAILS;
       case 'l':
         return StateOfManager.DELETE_CONTACT;
-      case 'r':
-        return StateOfManager.LOAD_REPOSITORY;
+      case 'o':
+        return StateOfManager.NOT_IMPLEMENTET;
       case 's':
-        return StateOfManager.SAVE_REPOSITORY;
+        return StateOfManager.NOT_IMPLEMENTET;
       case 'b':
         return StateOfManager.END;
       default:
@@ -39,12 +39,12 @@ class InputHandler {
   private static void prtintCommands() {
     System.out.println("\n\n");
     System.out.println("[A] Alle Kontakte anzeigen");
+    System.out.println("[O] Alle Kontakte Sortiert");
     System.out.println("[N] Neuen Kontakt erstellen");
     System.out.println("[K] Kontakt bearbeiten");
     System.out.println("[D] Kontaktdetails anzeigen");
+    System.out.println("[S] Kontakt suchen");
     System.out.println("[L] Kontakt loeschen");
-    System.out.println("[S] Speichere Addressbuch");
-    System.out.println("[R] Lade Addressbuch");
     System.out.println("[B] Beenden");
   }
 

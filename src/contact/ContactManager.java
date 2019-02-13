@@ -4,7 +4,7 @@ import contact.services.ContactCardService;
 
 enum StateOfManager {
   GET_COMMAND, END, INIT, CREATE_NEW_CONTACT, DELETE_CONTACT, EDIT_CONTACT,
-  PRINT_CONTACT_DETAILS, SAVE_REPOSITORY, LOAD_REPOSITORY, GET_ALL_CONTACTS
+  PRINT_CONTACT_DETAILS, SAVE_REPOSITORY, LOAD_REPOSITORY, NOT_IMPLEMENTET, GET_ALL_CONTACTS
 }
 
 public class ContactManager {
@@ -58,12 +58,9 @@ public class ContactManager {
         case PRINT_CONTACT_DETAILS:
           stateOfManager = executePrintDetails();
           break;
-        case SAVE_REPOSITORY:
-          stateOfManager = executeSaveRepo();
-          break;
-        case LOAD_REPOSITORY:
-          stateOfManager = executeLoadRepo();
-          break;
+        case NOT_IMPLEMENTET:
+          System.out.println("Not Implementet yet");
+          stateOfManager = StateOfManager.GET_COMMAND;
         case END:
           System.out.println("Auf Wiedersehen!");
           return;

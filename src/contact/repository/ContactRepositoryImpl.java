@@ -81,6 +81,6 @@ public class ContactRepositoryImpl implements ContactRepository, Serializable {
   }
 
   private boolean contactCardContainsParam(ContactCard contactCard, String searchParam) {
-    return contactCard.toString().toLowerCase().contains(searchParam);
+    return contactCard.toString().toLowerCase().contains(searchParam.toLowerCase());
   }
 }

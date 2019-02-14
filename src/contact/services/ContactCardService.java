@@ -156,6 +156,6 @@ public class ContactCardService {
   }
 
   public List<ContactCard> getSearchResult(String readSearchParameter) {
-    return contactRepository.getContactsBySearchParam(readSearchParameter.toLowerCase());
+    return contactRepository.getContactsBySearchParam(readSearchParameter);
   }
 }
